@@ -1,0 +1,30 @@
+<div *ngIf="itemType === 'product'; else employeeCard">
+  <h1 class="text-center">{{product.name}}</h1>
+  <div class="image-block mb-3">
+    <div class="image-wrapper">
+      <img [src]="product.img" alt="Фото товара">
+    </div>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">Тип: {{product.type}}</li>
+    <li class="list-group-item">Поставщик: {{product.provider}}</li>
+    <li class="list-group-item">Материал: {{product.material}}</li>
+    <li class="list-group-item">Вес: {{product.weight}}</li>
+    <li class="list-group-item">Цена: {{product.cost}}</li>
+  </ul>
+</div>
+<ng-template #employeeCard>
+  <div>
+    <h1 class="text-center">{{employee.name}} {{employee.surname}}</h1>
+    <div class="image-block mb-3">
+      <div class="image-wrapper">
+        <img [src]="employee.img" alt="Фото сотрудника">
+      </div>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">Возраст: {{employee.age}}</li>
+      <li class="list-group-item">Должность: {{employee.position}}</li>
+      <li class="list-group-item">З/П: {{employee.salary}}</li>
+    </ul>
+  </div>
+</ng-template>

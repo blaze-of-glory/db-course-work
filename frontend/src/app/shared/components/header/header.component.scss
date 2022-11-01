@@ -1,0 +1,10 @@
+@import 'src/assets/styles/constants/colors';
+
+header {
+  background-color: $main-color;
+  padding: 0 5%;
+}
+
+.logo {
+  cursor: pointer;
+}
