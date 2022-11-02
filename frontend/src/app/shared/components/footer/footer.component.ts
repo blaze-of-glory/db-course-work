@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ROUTER_LINKS } from '../../../core/constants/router-links';
 
 @Component({
   selector: 'app-footer',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
+
+  public readonly ROUTER_LINKS = ROUTER_LINKS;
 
   constructor() { }
 }
