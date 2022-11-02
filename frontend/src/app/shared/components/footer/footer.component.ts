@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ROUTER_LINKS } from '../../../core/constants/router-links';
+import { ROUTER_LINKS } from '../../constants/router-links';
 
 @Component({
   selector: 'app-footer',

@@ -6,6 +6,5 @@ export const ROUTER_NAMES = {
   PRODUCT: 'providers-list/:provider/:material/:product',
   EMPLOYEES: 'employees',
   EMPLOYEE: 'employees/:employee',
-  SHOPS: 'shops',
-  SHOP: 'shops/:shop',
+  SHOPS: 'shops'
 }
