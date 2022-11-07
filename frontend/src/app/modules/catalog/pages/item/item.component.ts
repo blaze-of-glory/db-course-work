@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { Product } from "../../../../shared/interfaces/product.interface";
+import { Product } from "../../../../shared/interfaces/product";
 import { Employee } from "../../../../shared/interfaces/employee";
 import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 

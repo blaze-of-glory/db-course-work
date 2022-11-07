@@ -1,13 +1,25 @@
 <h1 class="text-center">{{pageTitle}}</h1>
 <div class="container text-center">
   <div class="row" [ngSwitch]="catalogType">
-    <ng-template ngSwitchCase="employees" #employeesCase>
+    <ng-template ngSwitchCase="employees">
       <div *ngFor="let employee of employeesList" class="col-3 mb-3">
         <div class="card" style="width: 18rem;">
           <img [src]="employee?.img" alt="Фото сотрудника" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">{{employee.name}} {{employee.surname}}</h5>
             <a [routerLink]="employee.id" class="card-link">{{buttonText}}</a>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template ngSwitchCase="shops">
+      <div *ngFor="let shop of shopsList" class="col-3 mb-3">
+        <div class="card" style="width: 18rem;">
+          <img [src]="shop?.img" alt="Фото магазина" class="card-img-top">
+          <div class="card-body">
+            <p>Адресс: {{shop.address}}</p>
+            <h5 class="card-title">с {{shop.openTime}} до {{shop.closeTime}}</h5>
+            <a [routerLink]="shop.id" class="card-link">{{buttonText}}</a>
           </div>
         </div>
       </div>

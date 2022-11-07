@@ -4,6 +4,7 @@ import { DisplayItem } from "../../../../shared/interfaces/display-item";
 import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 import { Employee } from "../../../../shared/interfaces/employee";
 import { ApiService } from "../../../../core/api.service";
+import { Shop } from "../../../../shared/interfaces/shop";
 
 @Component({
   selector: 'app-catalog',
@@ -14,6 +15,7 @@ export class CatalogComponent implements OnInit {
   public pageTitle!: string;
   public buttonText!: string;
   public employeesList!: Employee[];
+  public shopsList!: Shop[];
   public catalogType!: 'providers' | 'materials' | 'products' | 'employees' | 'shops';
   public displayList!: DisplayItem[];
   private readonly providersListMock: DisplayItem[] = [
@@ -42,17 +44,6 @@ export class CatalogComponent implements OnInit {
     }
   ];
 
-  private readonly shopsListMock: DisplayItem[] = [
-    {
-      id: '1',
-      img: 'http://i3.photo.2gis.com/images/branch/52/7318349400365045_2bc0.jpg',
-      title: 'Отделение по адресу Притыцкого 32',
-      description: 'с 9 - 21'
-    }
-  ];
-
-
-
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService
@@ -78,18 +69,22 @@ export class CatalogComponent implements OnInit {
         this.buttonText = 'Подробней';
         break;
       }
-      case ROUTER_NAMES.EMPLOYEES: {
+      case ROUTER_NAMES.EMPLOYEES : {
         this.apiService.getAllEmployees().subscribe(employees => {
-          this.catalogType = "employees";
+          this.catalogType = 'employees';
           this.pageTitle = 'Список сотрудников';
           this.employeesList = employees;
           this.buttonText = 'Подробней';
-        })
+        });
         break;
       }
       case ROUTER_NAMES.SHOPS : {
-        this.pageTitle = 'Список магазинов';
-        this.displayList = this.shopsListMock;
+        this.apiService.getAllShops().subscribe(shops => {
+          this.catalogType = 'shops';
+          this.pageTitle = 'Список магазинов';
+          this.shopsList = shops;
+        });
+        break;
       }
     }
   }
