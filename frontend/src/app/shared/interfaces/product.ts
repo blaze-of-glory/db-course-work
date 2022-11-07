@@ -1,10 +1,11 @@
 export interface Product {
   id: string;
-  img: string;
-  type: string;
-  name: string;
+  title: string;
   provider: string;
   material: string;
-  cost: string;
+  img: string;
+  description: string;
+  type: string;
   weight: string;
+  cost: string;
 }

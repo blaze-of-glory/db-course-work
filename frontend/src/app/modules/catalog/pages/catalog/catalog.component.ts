@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { DisplayItem } from "../../../../shared/interfaces/display-item";
 import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 import { Employee } from "../../../../shared/interfaces/employee";
 import { ApiService } from "../../../../core/api.service";
 import { Shop } from "../../../../shared/interfaces/shop";
 import { Provider } from "../../../../shared/interfaces/provider";
 import { Material } from "../../../../shared/interfaces/material";
+import { Product } from "../../../../shared/interfaces/product";
 
 @Component({
   selector: 'app-catalog',
@@ -18,18 +18,10 @@ export class CatalogComponent implements OnInit {
   public buttonText!: string;
   public providersList!: Provider[];
   public materialsList!: Material[];
+  public productsList!: Product[];
   public employeesList!: Employee[];
   public shopsList!: Shop[];
   public catalogType!: 'providers' | 'materials' | 'products' | 'employees' | 'shops';
-  public displayList!: DisplayItem[];
-  private readonly productsListMock: DisplayItem[] = [
-    {
-      id: '1',
-      img: 'https://static.mineralmarket.ru/img/p/477104-1858481.jpg',
-      title: 'Цепь',
-      description: 'Красивое описание'
-    }
-  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -57,9 +49,12 @@ export class CatalogComponent implements OnInit {
         break;
       }
       case ROUTER_NAMES.PRODUCTS : {
-        this.pageTitle = 'Список изделий';
-        this.displayList = this.productsListMock;
-        this.buttonText = 'Подробней';
+        this.apiService.getAvailableProducts(this.route.snapshot.params['provider'],this.route.snapshot.params['material']).subscribe(products => {
+          this.catalogType = 'products';
+          this.pageTitle = 'Список изделий';
+          this.productsList = products;
+          this.buttonText = 'Подробней';
+        });
         break;
       }
       case ROUTER_NAMES.EMPLOYEES : {

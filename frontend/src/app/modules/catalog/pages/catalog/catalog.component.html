@@ -48,5 +48,17 @@
         </div>
       </div>
     </ng-template>
+    <ng-template ngSwitchCase="products">
+      <div *ngFor="let product of productsList" class="col-3 mb-3">
+        <div class="card" style="width: 18rem;">
+          <img [src]="product?.img" alt="Фото изделия" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{product.title}}</h5>
+            <p>{{product.description}}</p>
+            <a [routerLink]="product.id" class="card-link">{{buttonText}}</a>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

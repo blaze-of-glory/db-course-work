@@ -12,14 +12,15 @@ import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 export class ItemComponent implements OnInit{
 
   private readonly productMock: Product = {
-    id: '1',
-    img: 'https://data2.1freewallpapers.com/detail/mountain-lake-beautiful-night.jpg',
-    type: 'Цепь',
-    name: 'Цепь Арго',
-    provider: 'Поставщик 1',
-    material: 'серебро',
-    weight: '500',
-    cost: '100'
+    "id": "1",
+    "img": "https://static.mineralmarket.ru/img/p/477104-1858481.jpg",
+    "title": "Цепь",
+    "description": "Красивое описание",
+    "type": "Цепь",
+    "provider": "Поставщик 1",
+    "material": "серебро",
+    "weight": "500",
+    "cost": "100"
   };
 
   private readonly employeesMock: Employee = {

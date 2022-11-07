@@ -7,6 +7,7 @@ import { Employee } from "../shared/interfaces/employee";
 import { Shop } from "../shared/interfaces/shop";
 import { Provider } from "../shared/interfaces/provider";
 import { Material } from "../shared/interfaces/material";
+import { Product } from "../shared/interfaces/product";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class ApiService {
 
   public getAvailableMaterials(providerId: string): Observable<Material[]> {
     return this.http.get<Material[]>(this.apiEndpoint + `/materials?provider=${providerId}`);
+  }
+
+  public getAvailableProducts(providerId: string, materialId: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiEndpoint + `/products?provider=${providerId}&material=${materialId}`);
   }
 
 }
