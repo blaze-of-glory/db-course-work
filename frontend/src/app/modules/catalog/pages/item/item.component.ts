@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Product } from "../../../../shared/interfaces/product.interface";
-import { Employee } from "../../../../shared/interfaces/employee.interface";
+import { Employee } from "../../../../shared/interfaces/employee";
 import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 
 @Component({

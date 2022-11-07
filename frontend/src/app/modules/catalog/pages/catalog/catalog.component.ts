@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { DisplayItem } from "../../../../shared/interfaces/display-item.interface";
+import { DisplayItem } from "../../../../shared/interfaces/display-item";
 import {ROUTER_NAMES} from '../../../../shared/constants/router-names';
 
 @Component({

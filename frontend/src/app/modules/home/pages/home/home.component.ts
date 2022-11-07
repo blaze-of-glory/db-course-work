@@ -7,7 +7,5 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  aboutUsText = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, voluptates?';
-
   constructor() { }
 }
