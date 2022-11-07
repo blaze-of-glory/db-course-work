@@ -5,7 +5,8 @@ import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 import { Employee } from "../../../../shared/interfaces/employee";
 import { ApiService } from "../../../../core/api.service";
 import { Shop } from "../../../../shared/interfaces/shop";
-import {Provider} from "../../../../shared/interfaces/provider";
+import { Provider } from "../../../../shared/interfaces/provider";
+import { Material } from "../../../../shared/interfaces/material";
 
 @Component({
   selector: 'app-catalog',
@@ -16,18 +17,11 @@ export class CatalogComponent implements OnInit {
   public pageTitle!: string;
   public buttonText!: string;
   public providersList!: Provider[];
+  public materialsList!: Material[];
   public employeesList!: Employee[];
   public shopsList!: Shop[];
   public catalogType!: 'providers' | 'materials' | 'products' | 'employees' | 'shops';
   public displayList!: DisplayItem[];
-  private readonly materialsListMock: DisplayItem[] = [
-    {
-      id: 'silver',
-      img: 'https://wallpapercave.com/wp/wp9805963.jpg',
-      title: 'Серебро',
-      description: 'Красивое описание'
-    }
-  ]
   private readonly productsListMock: DisplayItem[] = [
     {
       id: '1',
@@ -54,9 +48,12 @@ export class CatalogComponent implements OnInit {
         break;
       }
       case ROUTER_NAMES.MATERIALS : {
-        this.pageTitle = 'Список материалов';
-        this.displayList = this.materialsListMock;
-        this.buttonText = 'Просмотреть все';
+        this.apiService.getAvailableMaterials(this.route.snapshot.params['provider']).subscribe(materials => {
+          this.catalogType = 'materials';
+          this.pageTitle = 'Список материалов';
+          this.materialsList = materials;
+          this.buttonText = 'Просмотреть все';
+        });
         break;
       }
       case ROUTER_NAMES.PRODUCTS : {

@@ -6,6 +6,7 @@ import { AboutUs } from "../shared/interfaces/about-us";
 import { Employee } from "../shared/interfaces/employee";
 import { Shop } from "../shared/interfaces/shop";
 import { Provider } from "../shared/interfaces/provider";
+import { Material } from "../shared/interfaces/material";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class ApiService {
 
   public getAllProviders(): Observable<Provider[]> {
     return this.http.get<Provider[]>(this.apiEndpoint + '/providers');
+  }
+
+  public getAvailableMaterials(providerId: string): Observable<Material[]> {
+    return this.http.get<Material[]>(this.apiEndpoint + `/materials?provider=${providerId}`);
   }
 
 }
