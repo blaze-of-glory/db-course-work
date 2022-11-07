@@ -1,15 +1,16 @@
 <h1 class="text-center">{{pageTitle}}</h1>
 <div class="container text-center">
-  <div class="row">
-    <div *ngFor="let item of displayList" class="col-3 mb-3">
-      <div class="card" style="width: 18rem;">
-        <img [src]="item.img" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title">{{item.title}}</h5>
-          <p *ngIf="item.description" class="card-text">{{item.description}}</p>
-          <a [routerLink]="item.id" class="card-link">{{buttonText}}</a>
+  <div class="row" [ngSwitch]="catalogType">
+    <ng-template ngSwitchCase="employees" #employeesCase>
+      <div *ngFor="let employee of employeesList" class="col-3 mb-3">
+        <div class="card" style="width: 18rem;">
+          <img [src]="employee?.img" alt="Фото сотрудника" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{employee.name}} {{employee.surname}}</h5>
+            <a [routerLink]="employee.id" class="card-link">{{buttonText}}</a>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-template>
   </div>
 </div>

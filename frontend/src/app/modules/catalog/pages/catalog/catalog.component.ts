@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { DisplayItem } from "../../../../shared/interfaces/display-item";
-import {ROUTER_NAMES} from '../../../../shared/constants/router-names';
+import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
+import { Employee } from "../../../../shared/interfaces/employee";
+import { ApiService } from "../../../../core/api.service";
 
 @Component({
   selector: 'app-catalog',
@@ -11,6 +13,8 @@ import {ROUTER_NAMES} from '../../../../shared/constants/router-names';
 export class CatalogComponent implements OnInit {
   public pageTitle!: string;
   public buttonText!: string;
+  public employeesList!: Employee[];
+  public catalogType!: 'providers' | 'materials' | 'products' | 'employees' | 'shops';
   public displayList!: DisplayItem[];
   private readonly providersListMock: DisplayItem[] = [
     {
@@ -38,15 +42,6 @@ export class CatalogComponent implements OnInit {
     }
   ];
 
-  private readonly employeesListMock: DisplayItem[] = [
-    {
-      id: '1',
-      img: 'https://fikiwiki.com/uploads/posts/2022-02/1644924565_55-fikiwiki-com-p-kartinki-uspeshnikh-lyudei-56.jpg',
-      title: 'Сотрудник',
-      description: 'Должность'
-    }
-  ];
-
   private readonly shopsListMock: DisplayItem[] = [
     {
       id: '1',
@@ -59,7 +54,8 @@ export class CatalogComponent implements OnInit {
 
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
@@ -83,9 +79,12 @@ export class CatalogComponent implements OnInit {
         break;
       }
       case ROUTER_NAMES.EMPLOYEES: {
-        this.pageTitle = 'Список сотрудников';
-        this.displayList = this.employeesListMock;
-        this.buttonText = 'Подробней';
+        this.apiService.getAllEmployees().subscribe(employees => {
+          this.catalogType = "employees";
+          this.pageTitle = 'Список сотрудников';
+          this.employeesList = employees;
+          this.buttonText = 'Подробней';
+        })
         break;
       }
       case ROUTER_NAMES.SHOPS : {
