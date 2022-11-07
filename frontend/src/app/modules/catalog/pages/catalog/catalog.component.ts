@@ -5,6 +5,7 @@ import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 import { Employee } from "../../../../shared/interfaces/employee";
 import { ApiService } from "../../../../core/api.service";
 import { Shop } from "../../../../shared/interfaces/shop";
+import {Provider} from "../../../../shared/interfaces/provider";
 
 @Component({
   selector: 'app-catalog',
@@ -14,19 +15,11 @@ import { Shop } from "../../../../shared/interfaces/shop";
 export class CatalogComponent implements OnInit {
   public pageTitle!: string;
   public buttonText!: string;
+  public providersList!: Provider[];
   public employeesList!: Employee[];
   public shopsList!: Shop[];
   public catalogType!: 'providers' | 'materials' | 'products' | 'employees' | 'shops';
   public displayList!: DisplayItem[];
-  private readonly providersListMock: DisplayItem[] = [
-    {
-      id: 'provider-1',
-      img: 'https://moto-ac.ru/thumb/2/XH4gRcocPKyjCSuTt-_CiA/r/d/onlata_i_dostavka.jpg',
-      title: 'Поставщик 1',
-      subTitle: 'Лучшее золото',
-      description: 'Красивое описание'
-    },
-  ];
   private readonly materialsListMock: DisplayItem[] = [
     {
       id: 'silver',
@@ -52,9 +45,12 @@ export class CatalogComponent implements OnInit {
   ngOnInit(): void {
     switch (this.route.snapshot.routeConfig?.path) {
       case ROUTER_NAMES.PROVIDERS : {
-        this.pageTitle = 'Список поставщиков';
-        this.displayList = this.providersListMock;
-        this.buttonText = 'Просмотреть всех';
+        this.apiService.getAllProviders().subscribe(providers => {
+          this.catalogType = 'providers';
+          this.pageTitle = 'Список поставщиков';
+          this.providersList = providers;
+          this.buttonText = 'Просмотреть всех';
+        });
         break;
       }
       case ROUTER_NAMES.MATERIALS : {

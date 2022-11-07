@@ -24,5 +24,17 @@
         </div>
       </div>
     </ng-template>
+    <ng-template ngSwitchCase="providers">
+      <div *ngFor="let provider of providersList" class="col-3 mb-3">
+        <div class="card" style="width: 18rem;">
+          <img [src]="provider?.img" alt="Логотип поставщика" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{provider.title}}</h5>
+            <p>{{provider.description}}</p>
+            <a [routerLink]="provider.id" class="card-link">{{buttonText}}</a>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

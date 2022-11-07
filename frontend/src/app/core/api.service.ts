@@ -5,6 +5,7 @@ import { environment } from "../../environments/environment";
 import { AboutUs } from "../shared/interfaces/about-us";
 import { Employee } from "../shared/interfaces/employee";
 import { Shop } from "../shared/interfaces/shop";
+import { Provider } from "../shared/interfaces/provider";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class ApiService {
 
   public getAllShops(): Observable<Shop[]> {
     return this.http.get<Shop[]>(this.apiEndpoint + '/shops');
+  }
+
+  public getAllProviders(): Observable<Provider[]> {
+    return this.http.get<Provider[]>(this.apiEndpoint + '/providers');
   }
 
 }
