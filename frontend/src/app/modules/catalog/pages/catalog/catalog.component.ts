@@ -7,6 +7,7 @@ import { Shop } from "../../../../shared/interfaces/shop";
 import { Provider } from "../../../../shared/interfaces/provider";
 import { Material } from "../../../../shared/interfaces/material";
 import { Product } from "../../../../shared/interfaces/product";
+import { ROUTER_LINKS } from '../../../../shared/constants/router-links';
 
 @Component({
   selector: 'app-catalog',
@@ -22,6 +23,8 @@ export class CatalogComponent implements OnInit {
   public employeesList!: Employee[];
   public shopsList!: Shop[];
   public catalogType!: 'providers' | 'materials' | 'products' | 'employees' | 'shops';
+
+  public readonly ROUTER_LINKS = ROUTER_LINKS;
 
   constructor(
     private route: ActivatedRoute,

@@ -11,6 +11,9 @@
           </div>
         </div>
       </div>
+      <div>
+        <button [routerLink]="ROUTER_LINKS.ADD + '/employee'" class="btn btn-success ms-2 add">+</button>
+      </div>
     </ng-template>
     <ng-template ngSwitchCase="shops">
       <div *ngFor="let shop of shopsList" class="col-3 mb-3">
@@ -22,6 +25,9 @@
             <a [routerLink]="shop.id" class="card-link">{{buttonText}}</a>
           </div>
         </div>
+      </div>
+      <div>
+        <button [routerLink]="ROUTER_LINKS.ADD + '/shop'" class="btn btn-success ms-2 add">+</button>
       </div>
     </ng-template>
     <ng-template ngSwitchCase="providers">
