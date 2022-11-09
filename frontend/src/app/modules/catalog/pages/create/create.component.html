@@ -1,1 +1,57 @@
-<p>create works!</p>
+<h1 class="text-center">{{title}}</h1>
+<div class="container">
+  <div [ngSwitch]="instance" class="d-flex flex-column align-items-center">
+    <ng-template ngSwitchCase="employee">
+      <form [formGroup]="employeeForm">
+        <div class="mb-3">
+          <label for="employeePhoto" class="form-label">Фото</label>
+          <input formControlName="img" class="form-control" id="employeePhoto" aria-describedby="employeePhotoHelp">
+          <div id="employeePhotoHelp" class="form-text">Укажите ссылку на фото сотрудника</div>
+        </div>
+        <div class="mb-3">
+          <label for="employeeName" class="form-label">Имя</label>
+          <input formControlName="name" class="form-control" id="employeeName">
+        </div>
+        <div class="mb-3">
+          <label for="employeeSurname" class="form-label">Фамилия</label>
+          <input formControlName="surname" class="form-control" id="employeeSurname">
+        </div>
+        <div class="mb-3">
+          <label for="employeeAge" class="form-label">Возраст</label>
+          <input formControlName="age" class="form-control" id="employeeAge">
+        </div>
+        <div class="mb-3">
+          <label for="employeePosition" class="form-label">Должность</label>
+          <input formControlName="position" class="form-control" id="employeePosition">
+        </div>
+        <div class="mb-3">
+          <label for="employeeSalary" class="form-label">Заработная плата</label>
+          <input formControlName="salary" class="form-control" id="employeeSalary">
+        </div>
+        <button [disabled]="employeeForm.invalid" class="btn btn-primary">Создать</button>
+      </form>
+    </ng-template>
+    <ng-template ngSwitchCase="shop">
+      <form [formGroup]="shopForm">
+        <div class="mb-3">
+          <label for="shopPhoto" class="form-label">Фото</label>
+          <input formControlName="img" class="form-control" id="shopPhoto" aria-describedby="shopPhotoHelp">
+          <div id="shopPhotoHelp" class="form-text">Укажите ссылку на фото магазина</div>
+        </div>
+        <div class="mb-3">
+          <label for="shopAddress" class="form-label">Адресс</label>
+          <input formControlName="address" class="form-control" id="shopAddress">
+        </div>
+        <div class="mb-3">
+          <label for="shopOpenTime" class="form-label">Время открытия</label>
+          <input formControlName="openTime" class="form-control" id="shopOpenTime">
+        </div>
+        <div class="mb-3">
+          <label for="shopCloseTime" class="form-label">Время закрытия</label>
+          <input formControlName="closeTime" class="form-control" id="shopCloseTime">
+        </div>
+        <button [disabled]="shopForm.invalid" class="btn btn-primary">Создать</button>
+      </form>
+    </ng-template>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { CatalogComponent } from './pages/catalog/catalog.component';
 import { RouterLink, RouterLinkWithHref } from "@angular/router";
 import { ItemComponent } from "./pages/item/item.component";
 import { CreateComponent } from './pages/create/create.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -16,7 +17,8 @@ import { CreateComponent } from './pages/create/create.component';
     imports: [
         CommonModule,
         RouterLinkWithHref,
-        RouterLink
+        RouterLink,
+        ReactiveFormsModule
     ]
 })
 export class CatalogModule { }
