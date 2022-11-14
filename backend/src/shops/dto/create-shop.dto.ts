@@ -1,5 +1,4 @@
-export interface Shop {
-    id: string;
+export class CreateShopDto {
     img: string;
     address: string;
     openTime: string;
