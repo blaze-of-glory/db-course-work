@@ -30,6 +30,14 @@ export class ApiService {
     return this.http.get<Shop[]>(this.apiEndpoint + '/shops');
   }
 
+  public createShop(shopDetails: any): Observable<Shop> {
+    return this.http.post<Shop>(this.apiEndpoint + '/shops', shopDetails);
+  }
+
+  public deleteShop(id: string): Observable<string> {
+    return this.http.delete<string>(this.apiEndpoint + `/shops/${id}`);
+  }
+
   public getAllProviders(): Observable<Provider[]> {
     return this.http.get<Provider[]>(this.apiEndpoint + '/providers');
   }

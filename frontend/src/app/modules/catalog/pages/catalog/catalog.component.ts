@@ -34,48 +34,83 @@ export class CatalogComponent implements OnInit {
   ngOnInit(): void {
     switch (this.route.snapshot.routeConfig?.path) {
       case ROUTER_NAMES.PROVIDERS : {
+        this.catalogType = 'providers';
+        this.pageTitle = 'Список поставщиков';
+        this.buttonText = 'Просмотреть всех';
+        this.getAll();
+        break;
+      }
+      case ROUTER_NAMES.MATERIALS : {
+        this.catalogType = 'materials';
+        this.pageTitle = 'Список материалов';
+        this.buttonText = 'Просмотреть все';
+        this.getAll();
+        break;
+      }
+      case ROUTER_NAMES.PRODUCTS : {
+        this.catalogType = 'products';
+        this.pageTitle = 'Список изделий';
+        this.buttonText = 'Подробней';
+        this.getAll();
+        break;
+      }
+      case ROUTER_NAMES.EMPLOYEES : {
+        this.catalogType = 'employees';
+        this.pageTitle = 'Список сотрудников';
+        this.buttonText = 'Подробней';
+        this.getAll();
+        break;
+      }
+      case ROUTER_NAMES.SHOPS : {
+        this.catalogType = 'shops';
+        this.pageTitle = 'Список магазинов';
+        this.getAll();
+        break;
+      }
+    }
+  }
+
+  private getAll() {
+    switch (this.route.snapshot.routeConfig?.path) {
+      case ROUTER_NAMES.PROVIDERS : {
         this.apiService.getAllProviders().subscribe(providers => {
-          this.catalogType = 'providers';
-          this.pageTitle = 'Список поставщиков';
           this.providersList = providers;
-          this.buttonText = 'Просмотреть всех';
         });
         break;
       }
       case ROUTER_NAMES.MATERIALS : {
         this.apiService.getAvailableMaterials(this.route.snapshot.params['provider']).subscribe(materials => {
-          this.catalogType = 'materials';
-          this.pageTitle = 'Список материалов';
           this.materialsList = materials;
-          this.buttonText = 'Просмотреть все';
         });
         break;
       }
       case ROUTER_NAMES.PRODUCTS : {
         this.apiService.getAvailableProducts(this.route.snapshot.params['provider'],this.route.snapshot.params['material']).subscribe(products => {
-          this.catalogType = 'products';
-          this.pageTitle = 'Список изделий';
           this.productsList = products;
-          this.buttonText = 'Подробней';
         });
         break;
       }
       case ROUTER_NAMES.EMPLOYEES : {
         this.apiService.getAllEmployees().subscribe(employees => {
-          this.catalogType = 'employees';
-          this.pageTitle = 'Список сотрудников';
           this.employeesList = employees;
-          this.buttonText = 'Подробней';
         });
         break;
       }
       case ROUTER_NAMES.SHOPS : {
         this.apiService.getAllShops().subscribe(shops => {
-          this.catalogType = 'shops';
-          this.pageTitle = 'Список магазинов';
           this.shopsList = shops;
         });
         break;
+      }
+    }
+  }
+
+  delete(id: string) {
+    switch (this.route.snapshot.routeConfig?.path) {
+      case ROUTER_NAMES.SHOPS : {
+        this.apiService.deleteShop(id).subscribe(() => {
+          this.getAll();
+        });
       }
     }
   }

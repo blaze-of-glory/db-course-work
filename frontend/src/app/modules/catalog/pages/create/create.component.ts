@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ApiService } from "../../../../core/api.service";
+import { ROUTER_LINKS } from '../../../../shared/constants/router-links';
 
 @Component({
   selector: 'app-create',
@@ -13,7 +15,12 @@ export class CreateComponent implements OnInit{
   employeeForm!: FormGroup;
   shopForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) { }
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService
+    ) { }
 
   ngOnInit() {
     switch (this.route.snapshot.params['instance']) {
@@ -41,6 +48,45 @@ export class CreateComponent implements OnInit{
         });
         break;
       }
+    }
+  }
+
+  public create(): void {
+    switch (this.instance) {
+      case 'shop': {
+        this.apiService.createShop(this.shopForm.value).subscribe(() => {
+          this.shopForm.reset();
+          this.router.navigate([ROUTER_LINKS.SHOPS]);
+        });
+        break;
+      }
+    }
+  }
+
+  back() {
+    switch (this.instance) {
+      case 'shop': {
+        this.shopForm.reset();
+        this.router.navigate([ROUTER_LINKS.SHOPS]);
+        break;
+      }
+      case "employee": {
+        this.employeeForm.reset();
+        this.router.navigate([ROUTER_LINKS.EMPLOYEES]);
+        break;
+      }
+    }
+  }
+
+  isFormInvalid(): boolean {
+    switch (this.instance) {
+      case 'shop': {
+        return this.shopForm.invalid;
+      }
+      case "employee": {
+        return  this.employeeForm.invalid;
+      }
+      default: return true;
     }
   }
 }

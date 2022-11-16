@@ -22,7 +22,10 @@
           <div class="card-body">
             <p>Адресс: {{shop.address}}</p>
             <h5 class="card-title">с {{shop.openTime}} до {{shop.closeTime}}</h5>
-            <a [routerLink]="shop.id" class="card-link">{{buttonText}}</a>
+            <div class="d-flex justify-content-between mt-3">
+              <button class="btn btn-primary">Редактировать</button>
+              <button class="btn btn-danger" (click)="delete(shop.id)">Удалить</button>
+            </div>
           </div>
         </div>
       </div>
