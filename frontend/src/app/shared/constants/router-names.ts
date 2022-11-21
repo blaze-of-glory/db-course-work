@@ -7,5 +7,6 @@ export const ROUTER_NAMES = {
   EMPLOYEES: 'employees',
   EMPLOYEE: 'employees/:employee',
   SHOPS: 'shops',
-  ADD: 'add/:instance'
+  ADD: 'add/:instance',
+  EDIT: 'edit/:instance'
 }

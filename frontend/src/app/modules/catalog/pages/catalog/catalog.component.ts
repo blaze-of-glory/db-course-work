@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 import { Employee } from "../../../../shared/interfaces/employee";
 import { ApiService } from "../../../../core/api.service";
@@ -8,6 +8,7 @@ import { Provider } from "../../../../shared/interfaces/provider";
 import { Material } from "../../../../shared/interfaces/material";
 import { Product } from "../../../../shared/interfaces/product";
 import { ROUTER_LINKS } from '../../../../shared/constants/router-links';
+import { ItemService } from "../../../../core/item.service";
 
 @Component({
   selector: 'app-catalog',
@@ -27,8 +28,10 @@ export class CatalogComponent implements OnInit {
   public readonly ROUTER_LINKS = ROUTER_LINKS;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private itemService: ItemService
   ) { }
 
   ngOnInit(): void {
@@ -105,12 +108,21 @@ export class CatalogComponent implements OnInit {
     }
   }
 
-  delete(id: string) {
+  public delete(id: string) {
     switch (this.route.snapshot.routeConfig?.path) {
       case ROUTER_NAMES.SHOPS : {
         this.apiService.deleteShop(id).subscribe(() => {
           this.getAll();
         });
+      }
+    }
+  }
+
+  public edit(item: any) {
+    switch (this.route.snapshot.routeConfig?.path) {
+      case ROUTER_NAMES.SHOPS : {
+        this.itemService.currentShop = item;
+        this.router.navigate([this.ROUTER_LINKS.EDIT + '/shop']);
       }
     }
   }

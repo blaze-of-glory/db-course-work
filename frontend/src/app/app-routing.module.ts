@@ -4,7 +4,7 @@ import { ROUTER_NAMES } from "./shared/constants/router-names";
 import { HomeComponent } from "./modules/home/pages/home/home.component";
 import { CatalogComponent } from "./modules/catalog/pages/catalog/catalog.component";
 import { ItemComponent } from "./modules/catalog/pages/item/item.component";
-import { CreateComponent } from "./modules/catalog/pages/create/create.component";
+import { ManipulateComponent } from "./modules/catalog/pages/manipulate/manipulate.component";
 
 const routes: Routes = [
   {
@@ -48,7 +48,12 @@ const routes: Routes = [
   },
   {
     path: ROUTER_NAMES.ADD,
-    component: CreateComponent,
+    component: ManipulateComponent,
+    pathMatch: "full"
+  },
+  {
+    path: ROUTER_NAMES.EDIT,
+    component: ManipulateComponent,
     pathMatch: "full"
   }
 ];

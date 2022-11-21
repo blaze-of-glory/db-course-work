@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { RouterLink, RouterLinkWithHref } from "@angular/router";
 import { ItemComponent } from "./pages/item/item.component";
-import { CreateComponent } from './pages/create/create.component';
+import { ManipulateComponent } from './pages/manipulate/manipulate.component';
 import {ReactiveFormsModule} from "@angular/forms";
 
 
@@ -12,7 +12,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   declarations: [
     CatalogComponent,
     ItemComponent,
-    CreateComponent
+    ManipulateComponent
   ],
     imports: [
         CommonModule,

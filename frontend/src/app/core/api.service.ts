@@ -34,6 +34,10 @@ export class ApiService {
     return this.http.post<Shop>(this.apiEndpoint + '/shops', shopDetails);
   }
 
+  public editShop(id: string, shopDetails: any): Observable<Shop> {
+    return this.http.put<Shop>(this.apiEndpoint + `/shops/${id}`, shopDetails);
+  }
+
   public deleteShop(id: string): Observable<string> {
     return this.http.delete<string>(this.apiEndpoint + `/shops/${id}`);
   }

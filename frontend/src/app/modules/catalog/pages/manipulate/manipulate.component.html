@@ -52,8 +52,8 @@
       </form>
     </ng-template>
     <div class="d-flex justify-content-between">
-      <button (click)="create()" [disabled]="isFormInvalid()" class="btn btn-primary">Создать</button>
-      <button (click)="back()" class="btn btn-danger">Назад</button>
+      <button (click)="manipulate()" [disabled]="isFormInvalid(shopForm)" class="btn btn-primary">Отправить</button>
+      <button (click)="goBackToAll(shopForm, ROUTER_LINKS.SHOPS)" class="btn btn-danger">Назад</button>
     </div>
   </div>
 </div>
