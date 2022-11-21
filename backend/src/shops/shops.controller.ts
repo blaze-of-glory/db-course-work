@@ -20,13 +20,13 @@ export class ShopsController {
 
     @Put(':id')
     async updateShopById(@Param('id', ParseIntPipe) id: number, @Body() updateShopDto: UpdateShopDto): Promise<Shop> {
-       await this.shopsService.updateUser(id,updateShopDto);
+       await this.shopsService.updateShop(id,updateShopDto);
        return this.shopsService.getShopById(id);
     }
 
     @Delete(':id')
-    async deleteUserById(@Param('id', ParseIntPipe) id: number): Promise<HttpStatus.ACCEPTED> {
-        await this.shopsService.deleteUser(id);
+    async deleteShopById(@Param('id', ParseIntPipe) id: number): Promise<HttpStatus.ACCEPTED> {
+        await this.shopsService.deleteShop(id);
         return HttpStatus.ACCEPTED;
     }
 }

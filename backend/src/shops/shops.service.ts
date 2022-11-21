@@ -8,8 +8,7 @@ import { UpdateShopDto } from "./dto/update-shop.dto";
 @Injectable()
 export class ShopsService {
 
-    constructor(@InjectRepository(Shop) private shopRepository: Repository<Shop>) {
-    }
+    constructor(@InjectRepository(Shop) private shopRepository: Repository<Shop>) { }
 
     public getAllShops(): Promise<Shop[]> {
         return this.shopRepository.find();
@@ -27,11 +26,11 @@ export class ShopsService {
         return this.shopRepository.save(newShop);
     }
 
-    public updateUser(id: number, updateShopDetails: UpdateShopDto): Promise<UpdateResult> {
-        return this.shopRepository.update({ id }, {...updateShopDetails});
+    public updateShop(id: number, updateShopDetails: UpdateShopDto): Promise<UpdateResult> {
+        return this.shopRepository.update({ id }, { ...updateShopDetails });
     }
 
-    public deleteUser(id: number): Promise<DeleteResult> {
+    public deleteShop(id: number): Promise<DeleteResult> {
         return this.shopRepository.delete({ id });
     }
 }

@@ -7,6 +7,7 @@ import { EmployeesModule } from './employees/employees.module';
 import { ShopsModule } from './shops/shops.module';
 import { credentials } from "../credentials";
 import { Shop } from "./shops/shop.entity";
+import { Employee } from "./employees/employee.entity";
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { Shop } from "./shops/shop.entity";
       username: credentials.login,
       password: credentials.password,
       database: credentials.database,
-      entities: [Shop],
+      entities: [Shop, Employee],
       synchronize: true
     }),
     ProductsModule,
