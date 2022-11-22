@@ -29,6 +29,10 @@
           <input formControlName="salary" class="form-control" id="employeeSalary">
         </div>
       </form>
+      <div class="d-flex justify-content-between">
+        <button (click)="manipulate()" [disabled]="isFormInvalid(employeeForm)" class="btn btn-primary">Отправить</button>
+        <button (click)="goBackToAll(employeeForm, ROUTER_LINKS.EMPLOYEES)" class="btn btn-danger">Назад</button>
+      </div>
     </ng-template>
     <ng-template ngSwitchCase="shop">
       <form [formGroup]="shopForm">
@@ -50,10 +54,10 @@
           <input formControlName="closeTime" class="form-control" id="shopCloseTime">
         </div>
       </form>
+      <div class="d-flex justify-content-between">
+        <button (click)="manipulate()" [disabled]="isFormInvalid(shopForm)" class="btn btn-primary">Отправить</button>
+        <button (click)="goBackToAll(shopForm, ROUTER_LINKS.SHOPS)" class="btn btn-danger">Назад</button>
+      </div>
     </ng-template>
-    <div class="d-flex justify-content-between">
-      <button (click)="manipulate()" [disabled]="isFormInvalid(shopForm)" class="btn btn-primary">Отправить</button>
-      <button (click)="goBackToAll(shopForm, ROUTER_LINKS.SHOPS)" class="btn btn-danger">Назад</button>
-    </div>
   </div>
 </div>

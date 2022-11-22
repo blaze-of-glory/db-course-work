@@ -33,10 +33,23 @@ export class ManipulateComponent implements OnInit, OnDestroy{
         this.title = this.route.routeConfig?.path === ROUTER_NAMES.ADD ? 'Добавление нового магазина' : 'Редактирование магазина';
         this.instance = 'shop';
         this.shopForm = this.fb.group({
-          img: [this.itemService.currentShop?.img, [Validators.required]],
-          address: [this.itemService.currentShop?.address, [Validators.required]],
-          openTime: [this.itemService.currentShop?.openTime, [Validators.required]],
-          closeTime: [this.itemService.currentShop?.closeTime, [Validators.required]]
+          img: [this.itemService.selectedShop?.img, [Validators.required]],
+          address: [this.itemService.selectedShop?.address, [Validators.required]],
+          openTime: [this.itemService.selectedShop?.openTime, [Validators.required]],
+          closeTime: [this.itemService.selectedShop?.closeTime, [Validators.required]]
+        });
+        break;
+      }
+      case 'employee' : {
+        this.title = 'Добавить нового сотрудника';
+        this.instance = 'employee';
+        this.employeeForm = this.fb.group({
+          img: [this.itemService.selectedEmployee?.img, [Validators.required]],
+          name: [this.itemService.selectedEmployee?.name, [Validators.required]],
+          surname: [this.itemService.selectedEmployee?.surname, [Validators.required]],
+          age: [this.itemService.selectedEmployee?.age, [Validators.required]],
+          position: [this.itemService.selectedEmployee?.position, [Validators.required]],
+          salary: [this.itemService.selectedEmployee?.salary, [Validators.required]]
         });
         break;
       }
@@ -44,7 +57,7 @@ export class ManipulateComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.itemService.currentShop = null;
+    this.itemService.selectedShop = null;
   }
 
   public manipulate(): void {
@@ -55,8 +68,20 @@ export class ManipulateComponent implements OnInit, OnDestroy{
             this.goBackToAll(this.shopForm, ROUTER_LINKS.SHOPS);
           });
         } else {
-          this.apiService.editShop(this.itemService.currentShop.id, this.shopForm.value).subscribe(() => {
+          this.apiService.editShop(this.itemService.selectedShop.id, this.shopForm.value).subscribe(() => {
             this.goBackToAll(this.shopForm, ROUTER_LINKS.SHOPS);
+          })
+        }
+        break;
+      }
+      case 'employee': {
+        if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
+          this.apiService.createEmployee(this.employeeForm.value).subscribe(() => {
+            this.goBackToAll(this.employeeForm, ROUTER_LINKS.EMPLOYEES);
+          });
+        } else {
+          this.apiService.editEmployee(this.itemService.selectedEmployee.id, this.employeeForm.value).subscribe(() => {
+            this.goBackToAll(this.employeeForm, ROUTER_LINKS.EMPLOYEES);
           })
         }
         break;

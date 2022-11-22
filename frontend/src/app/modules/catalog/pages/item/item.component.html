@@ -14,7 +14,7 @@
   </ul>
 </div>
 <ng-template #employeeCard>
-  <div>
+  <div *ngIf="employee">
     <h1 class="text-center">{{employee.name}} {{employee.surname}}</h1>
     <div class="image-block mb-3">
       <div class="image-wrapper">

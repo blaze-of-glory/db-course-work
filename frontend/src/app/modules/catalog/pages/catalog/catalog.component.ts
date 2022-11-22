@@ -114,6 +114,13 @@ export class CatalogComponent implements OnInit {
         this.apiService.deleteShop(id).subscribe(() => {
           this.getAll();
         });
+        break;
+      }
+      case ROUTER_NAMES.EMPLOYEES: {
+        this.apiService.deleteEmployee(id).subscribe(() => {
+          this.getAll();
+        });
+        break;
       }
     }
   }
@@ -121,8 +128,14 @@ export class CatalogComponent implements OnInit {
   public edit(item: any) {
     switch (this.route.snapshot.routeConfig?.path) {
       case ROUTER_NAMES.SHOPS : {
-        this.itemService.currentShop = item;
+        this.itemService.selectedShop = item;
         this.router.navigate([this.ROUTER_LINKS.EDIT + '/shop']);
+        break;
+      }
+      case ROUTER_NAMES.EMPLOYEES : {
+        this.itemService.selectedEmployee = item;
+        this.router.navigate([this.ROUTER_LINKS.EDIT + '/employee']);
+        break;
       }
     }
   }

@@ -26,6 +26,22 @@ export class ApiService {
     return this.http.get<Employee[]>(this.apiEndpoint + '/employees');
   }
 
+  public getEmployeeById(id: string): Observable<Employee> {
+    return this.http.get<Employee>(this.apiEndpoint + `/employees/${id}`);
+  }
+
+  public createEmployee(employeeDetails: any): Observable<Employee> {
+    return this.http.post<Employee>(this.apiEndpoint + '/employees', employeeDetails);
+  }
+
+  public editEmployee(id: string,employeeDetails: any): Observable<Employee> {
+    return this.http.put<Employee>(this.apiEndpoint + `/employees/${id}`, employeeDetails);
+  }
+
+  public deleteEmployee(id: string): Observable<string> {
+    return this.http.delete<string>(this.apiEndpoint + `/employees/${id}`);
+  }
+
   public getAllShops(): Observable<Shop[]> {
     return this.http.get<Shop[]>(this.apiEndpoint + '/shops');
   }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Product } from "../../../../shared/interfaces/product";
 import { Employee } from "../../../../shared/interfaces/employee";
 import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
+import { ApiService } from "../../../../core/api.service";
 
 @Component({
   selector: 'app-item',
@@ -23,21 +24,11 @@ export class ItemComponent implements OnInit{
     "cost": "100"
   };
 
-  private readonly employeesMock: Employee = {
-    id: '1',
-    img: 'https://data2.1freewallpapers.com/detail/mountain-lake-beautiful-night.jpg',
-    name: 'Joe',
-    surname: 'Doe',
-    age: '42',
-    position: 'Regular',
-    salary: '300'
-  };
-
   product!: Product;
   employee!: Employee;
   itemType!: 'product' | 'employee';
 
-  constructor(private route: ActivatedRoute) {  }
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {  }
 
   ngOnInit(): void {
     switch (this.route.snapshot.routeConfig?.path) {
@@ -48,7 +39,9 @@ export class ItemComponent implements OnInit{
       }
       case ROUTER_NAMES.EMPLOYEE : {
         this.itemType = 'employee';
-        this.employee = this.employeesMock;
+        this.apiService.getEmployeeById(this.route.snapshot.params['employee']).subscribe(selectedEmployee => {
+          this.employee = selectedEmployee;
+        });
         break;
       }
     }
