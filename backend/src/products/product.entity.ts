@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Provider } from "../providers/provider.entity";
 
 @Entity({name: 'products'})
 export class Product {
@@ -23,8 +24,8 @@ export class Product {
     @Column({type: 'varchar', length: '16'})
     cost: string;
 
-    // @Column({type: 'varchar', length: '32'})
-    // provider: string;
+    @ManyToOne(() => Provider, provider => provider.products)
+    provider: Provider;
     //
     // @Column({type: 'varchar', length: '32'})
     // material: string;

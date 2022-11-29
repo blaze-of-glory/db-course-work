@@ -12,11 +12,6 @@ export class AppController {
     return this.appService.getAboutUsData();
   }
 
-  @Get('providers')
-  getAllProviders() {
-    return this.appService.getAllProviders();
-  }
-
   @Get( 'materials')
   getAvailableMaterials(@Query() query: MaterialsQueryDto) {
     if (!query.provider) {

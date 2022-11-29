@@ -33,5 +33,4 @@ export class ProductsService {
     public deleteProduct(id: number): Promise<DeleteResult> {
         return this.productRepository.delete({ id });
     }
-
 }
