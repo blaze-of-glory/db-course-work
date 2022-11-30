@@ -1,5 +1,4 @@
-export interface Material {
-    id: string;
+export class UpdateMaterialDto {
     img: string;
     title: string;
     description: string;

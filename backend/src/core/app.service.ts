@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { AboutUs } from "./interfaces/about-us.interface";
-import { Material } from "./interfaces/material.interface";
 
 @Injectable()
 export class AppService {
@@ -11,16 +10,4 @@ export class AppService {
             text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, voluptates?'
         }
     }
-
-    public getAvailableMaterials(): Material[] {
-        return [
-            {
-                id: 'silver',
-                img: 'https://wallpapercave.com/wp/wp9805963.jpg',
-                title: 'Серебро',
-                description: 'Красивое описание'
-            }
-        ]
-    }
-
 }

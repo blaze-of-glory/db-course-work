@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Provider } from "../providers/provider.entity";
+import { Material } from "../materials/material.entity";
 
 @Entity({name: 'products'})
 export class Product {
@@ -26,7 +27,7 @@ export class Product {
 
     @ManyToOne(() => Provider, provider => provider.products)
     provider: Provider;
-    //
-    // @Column({type: 'varchar', length: '32'})
-    // material: string;
+
+    @ManyToOne(() => Material, material => material.products)
+    material: Material;
 }

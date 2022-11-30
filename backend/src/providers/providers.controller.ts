@@ -7,32 +7,32 @@ import { UpdateProviderDto } from "./dto/update-provider.dto";
 @Controller('providers')
 export class ProvidersController {
 
-    constructor(private providerService: ProvidersService) {  }
+    constructor(private providersService: ProvidersService) {  }
 
     @Get()
     getAllProviders(): Promise<Provider[]> {
-        return this.providerService.getAllProviders();
+        return this.providersService.getAllProviders();
     }
 
     @Get(':id')
     getProviderById(@Param('id', ParseIntPipe) id: number): Promise<Provider> {
-        return this.providerService.getProviderById(id);
+        return this.providersService.getProviderById(id);
     }
 
     @Post()
     createProvider(@Body() createProviderDetails: CreateProviderDto): Promise<Provider> {
-        return this.providerService.createProvider(createProviderDetails);
+        return this.providersService.createProvider(createProviderDetails);
     }
 
     @Put(':id')
-    async updateProviderById(@Param('id', ParseIntPipe) id: number, @Body() updateProviderDto: UpdateProviderDto): Promise<Provider> {
-        await this.providerService.updateProvider(id, updateProviderDto);
-        return this.providerService.getProviderById(id);
+    async updateProviderById(@Param('id', ParseIntPipe) id: number, @Body() updatedProviderDetails: UpdateProviderDto): Promise<Provider> {
+        await this.providersService.updateProvider(id, updatedProviderDetails);
+        return this.providersService.getProviderById(id);
     }
 
     @Delete(':id')
     async deleteProvider(@Param('id', ParseIntPipe) id: number): Promise<HttpStatus.ACCEPTED> {
-        await this.providerService.deleteProvider(id);
+        await this.providersService.deleteProvider(id);
         return HttpStatus.ACCEPTED;
     }
 

@@ -1,7 +1,6 @@
-import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AboutUs } from "./interfaces/about-us.interface";
-import { MaterialsQueryDto } from "./dto/materialsQuery.dto";
 
 @Controller()
 export class AppController {
@@ -11,13 +10,4 @@ export class AppController {
   getAboutUsData(): AboutUs {
     return this.appService.getAboutUsData();
   }
-
-  @Get( 'materials')
-  getAvailableMaterials(@Query() query: MaterialsQueryDto) {
-    if (!query.provider) {
-      throw new BadRequestException('Material is missing');
-    }
-    return this.appService.getAvailableMaterials();
-  }
-
 }

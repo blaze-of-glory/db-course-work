@@ -11,6 +11,8 @@ import { Employee } from "./employees/employee.entity";
 import { Product } from "./products/product.entity";
 import { ProvidersModule } from './providers/providers.module';
 import { Provider } from "./providers/provider.entity";
+import { MaterialsModule } from './materials/materials.module';
+import { Material } from "./materials/material.entity";
 
 @Module({
   imports: [
@@ -21,13 +23,14 @@ import { Provider } from "./providers/provider.entity";
       username: credentials.login,
       password: credentials.password,
       database: credentials.database,
-      entities: [Shop, Employee, Product, Provider],
+      entities: [Shop, Employee, Product, Provider, Material],
       synchronize: true
     }),
     ProductsModule,
     EmployeesModule,
     ShopsModule,
-    ProvidersModule
+    ProvidersModule,
+    MaterialsModule
   ],
   controllers: [AppController],
   providers: [AppService],
