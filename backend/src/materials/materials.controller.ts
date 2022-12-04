@@ -15,24 +15,24 @@ export class MaterialsController {
     }
 
     @Get(':id')
-    getMaterialById(@Param('id', ParseIntPipe) id: number): Promise<Material> {
-        return this.materialsService.getMaterialById(id);
+    getMaterialById(@Param('id', ParseIntPipe) materialId: number): Promise<Material> {
+        return this.materialsService.getMaterialById(materialId);
     }
 
-    @Post()
-    createMaterial(@Body() createMaterialDetails: CreateMaterialDto): Promise<Material> {
-        return this.materialsService.createMaterial(createMaterialDetails);
+    @Post(':id')
+    createMaterial(@Param('id', ParseIntPipe) providerId: number, @Body() createMaterialDetails: CreateMaterialDto): Promise<Material> {
+        return this.materialsService.createMaterial(providerId, createMaterialDetails);
     }
 
     @Put(':id')
-    async updateMaterial(@Param('id', ParseIntPipe) id: number, @Body() updatedMaterialDetails: UpdateMaterialDto): Promise<Material> {
-        await this.materialsService.updateMaterial(id, updatedMaterialDetails);
-        return this.materialsService.getMaterialById(id);
+    async updateMaterial(@Param('id', ParseIntPipe) materialId: number, @Body() updatedMaterialDetails: UpdateMaterialDto): Promise<Material> {
+        await this.materialsService.updateMaterial(materialId, updatedMaterialDetails);
+        return this.materialsService.getMaterialById(materialId);
     }
 
     @Delete(':id')
-    async deleteMaterial(@Param('id', ParseIntPipe) id: number): Promise<HttpStatus.ACCEPTED> {
-        await this.materialsService.deleteMaterial(id);
+    async deleteMaterial(@Param('id', ParseIntPipe) materialId: number): Promise<HttpStatus.ACCEPTED> {
+        await this.materialsService.deleteMaterial(materialId);
         return HttpStatus.ACCEPTED;
     }
 }
