@@ -11,11 +11,11 @@ export class ProvidersService {
     constructor(@InjectRepository(Provider) private providerRepository: Repository<Provider>) { }
 
     public getAllProviders(): Promise<Provider[]> {
-        return this.providerRepository.find({relations: ['materials']});
+        return this.providerRepository.find({relations: ['materials', 'products']});
     }
 
     public getProviderById(id: number): Promise<Provider> {
-        return this.providerRepository.findOne({ where: { id }, relations: ['materials'] });
+        return this.providerRepository.findOne({ where: { id }, relations: ['materials', 'products'] });
     }
 
     public createProvider(providerDetails: CreateProviderDto): Promise<Provider> {

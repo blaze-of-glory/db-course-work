@@ -1,8 +1,7 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { ProductsService } from "./products.service";
 import { Product } from "./product.entity";
-import { CreateProductDto } from "./dto/create-product.dto";
-import { UpdateProductDto } from "./dto/update-product.dto";
+import { ProductDetailsDto, ProductDto } from './dto/product.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -19,13 +18,13 @@ export class ProductsController {
     }
 
     @Post()
-    createProduct(@Body() createProductDto: CreateProductDto): Promise<Product> {
-        return this.productsService.createProduct(createProductDto);
+    createProduct(@Body() productDto: ProductDto): Promise<Product> {
+        return this.productsService.createProduct(productDto.providerId, productDto.materialId, productDto.productDetails);
     }
 
     @Put(':id')
-    async updateProductById(@Param('id', ParseIntPipe) id: number, @Body() updateProductDto: UpdateProductDto): Promise<Product> {
-        await this.productsService.updateProduct(id, updateProductDto);
+    async updateProductById(@Param('id', ParseIntPipe) id: number, @Body() updatedProductDetailsDto: ProductDetailsDto): Promise<Product> {
+        await this.productsService.updateProduct(id, updatedProductDetailsDto);
         return this.productsService.getProductById(id);
     }
 

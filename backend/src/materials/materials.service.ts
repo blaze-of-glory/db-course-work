@@ -2,8 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Material } from "./material.entity";
 import { DeleteResult, Repository, UpdateResult } from "typeorm";
-import { CreateMaterialDetailsDto } from './dto/create-material.dto';
-import { UpdateMaterialDto } from "./dto/update-material.dto";
+import { MaterialDetailsDto } from './dto/material.dto';
 import { Provider } from '../providers/provider.entity';
 
 @Injectable()
@@ -15,14 +14,14 @@ export class MaterialsService {
     ) { }
 
     public getAllMaterials(): Promise<Material[]> {
-        return this.materialRepository.find({relations: ['providers']});
+        return this.materialRepository.find({relations: ['providers', 'products']});
     }
 
     public getMaterialById(id: number): Promise<Material> {
-        return this.materialRepository.findOneBy({ id });
+        return this.materialRepository.findOne({ where: { id }, relations: ['providers', 'products']});
     }
 
-    public async createMaterial(id: number, materialDetails: CreateMaterialDetailsDto): Promise<Material> {
+    public async createMaterial(id: number, materialDetails: MaterialDetailsDto): Promise<Material> {
         if (!Object.keys(materialDetails).length) {
             return null;
         }
@@ -40,7 +39,7 @@ export class MaterialsService {
         return this.materialRepository.save(newMaterial);
     }
 
-    public updateMaterial(id: number, updatedMaterialDetails: UpdateMaterialDto): Promise<UpdateResult> {
+    public updateMaterial(id: number, updatedMaterialDetails: MaterialDetailsDto): Promise<UpdateResult> {
         return this.materialRepository.update({ id }, { ...updatedMaterialDetails });
     }
 

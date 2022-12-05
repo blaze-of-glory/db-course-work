@@ -1,8 +1,7 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { MaterialsService } from "./materials.service";
 import { Material } from "./material.entity";
-import { CreateMaterialDto } from "./dto/create-material.dto";
-import { UpdateMaterialDto } from "./dto/update-material.dto";
+import { MaterialDetailsDto, MaterialDto } from './dto/material.dto';
 
 @Controller('materials')
 export class MaterialsController {
@@ -20,12 +19,12 @@ export class MaterialsController {
     }
 
     @Post()
-    createMaterial(@Body() createMaterialDto: CreateMaterialDto): Promise<Material> {
-        return this.materialsService.createMaterial(createMaterialDto.providerId, createMaterialDto.materialDetails);
+    createMaterial(@Body() materialDto: MaterialDto): Promise<Material> {
+        return this.materialsService.createMaterial(materialDto.providerId, materialDto.materialDetails);
     }
 
     @Put(':id')
-    async updateMaterial(@Param('id', ParseIntPipe) materialId: number, @Body() updatedMaterialDetails: UpdateMaterialDto): Promise<Material> {
+    async updateMaterial(@Param('id', ParseIntPipe) materialId: number, @Body() updatedMaterialDetails: MaterialDetailsDto): Promise<Material> {
         await this.materialsService.updateMaterial(materialId, updatedMaterialDetails);
         return this.materialsService.getMaterialById(materialId);
     }
