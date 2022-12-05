@@ -19,9 +19,9 @@ export class MaterialsController {
         return this.materialsService.getMaterialById(materialId);
     }
 
-    @Post(':id')
-    createMaterial(@Param('id', ParseIntPipe) providerId: number, @Body() createMaterialDetails: CreateMaterialDto): Promise<Material> {
-        return this.materialsService.createMaterial(providerId, createMaterialDetails);
+    @Post()
+    createMaterial(@Body() createMaterialDto: CreateMaterialDto): Promise<Material> {
+        return this.materialsService.createMaterial(createMaterialDto.providerId, createMaterialDto.materialDetails);
     }
 
     @Put(':id')

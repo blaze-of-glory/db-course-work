@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Material } from "./material.entity";
 import { DeleteResult, Repository, UpdateResult } from "typeorm";
-import { CreateMaterialDto } from "./dto/create-material.dto";
+import { CreateMaterialDetailsDto } from './dto/create-material.dto';
 import { UpdateMaterialDto } from "./dto/update-material.dto";
 import { Provider } from '../providers/provider.entity';
 
@@ -22,7 +22,7 @@ export class MaterialsService {
         return this.materialRepository.findOneBy({ id });
     }
 
-    public async createMaterial(id: number, materialDetails: CreateMaterialDto): Promise<Material> {
+    public async createMaterial(id: number, materialDetails: CreateMaterialDetailsDto): Promise<Material> {
         if (!Object.keys(materialDetails).length) {
             return null;
         }
