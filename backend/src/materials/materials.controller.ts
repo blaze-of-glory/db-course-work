@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { MaterialsService } from "./materials.service";
 import { Material } from "./material.entity";
 import { MaterialDetailsDto, MaterialDto } from './dto/material.dto';
@@ -11,6 +11,11 @@ export class MaterialsController {
     @Get()
     getAllMaterials(): Promise<Material[]> {
         return this.materialsService.getAllMaterials();
+    }
+
+    @Get('filter')
+    getAllProviderMaterials(@Query() query: {providerId: number}) {
+        return this.materialsService.getAllProviderMaterials(query.providerId);
     }
 
     @Get(':id')

@@ -17,6 +17,33 @@ export class MaterialsService {
         return this.materialRepository.find({relations: ['providers', 'products']});
     }
 
+    public async getAllProviderMaterials(id: number): Promise<Material[]> {
+        const provider: Provider = await this.providerRepository.findOneBy({ id });
+
+        if (!provider) {
+            throw new HttpException(
+                'Provider is not found. Cannot create material.',
+                HttpStatus.BAD_REQUEST
+            )
+        }
+
+        const subQueryResults = await this.materialRepository
+            .createQueryBuilder('material')
+            .select('material.id')
+            .innerJoin('material.providers', 'provider', 'provider.id = :id', { id })
+            .getMany();
+
+        if (!subQueryResults.length) {
+            return [];
+        }
+
+        return await this.materialRepository
+            .createQueryBuilder('material')
+            .where('material.id IN (:...subQuery)', {subQuery: subQueryResults.map(material => material.id)})
+            .innerJoinAndSelect('material.providers', 'providers')
+            .getMany();
+    }
+
     public getMaterialById(id: number): Promise<Material> {
         return this.materialRepository.findOne({ where: { id }, relations: ['providers', 'products']});
     }

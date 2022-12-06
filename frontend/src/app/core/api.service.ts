@@ -62,12 +62,12 @@ export class ApiService {
     return this.http.get<Provider[]>(this.apiEndpoint + '/providers');
   }
 
-  public getAvailableMaterials(providerId: string): Observable<Material[]> {
-    return this.http.get<Material[]>(this.apiEndpoint + `/materials?provider=${providerId}`);
+  public getFilteredMaterials(providerId: string): Observable<Material[]> {
+    return this.http.get<Material[]>(this.apiEndpoint + `/materials/filter?providerId=${providerId}`);
   }
 
-  public getAvailableProducts(providerId: string, materialId: string): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiEndpoint + `/products?provider=${providerId}&material=${materialId}`);
+  public getFilteredProducts(providerId: string, materialId: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiEndpoint + `/products/filter?providerId=${providerId}&materialId=${materialId}`);
   }
 
 }

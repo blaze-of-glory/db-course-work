@@ -19,6 +19,23 @@ export class ProductsService {
         return this.productRepository.find({relations: ['provider', 'material']});
     }
 
+    public async getFilteredProducts(providerId: number, materialId: number) {
+        const provider = await this.providerRepository.findOneBy({ id: providerId });
+        const material = await this.materialRepository.findOneBy({ id: materialId });
+
+        if (!provider || !material) {
+            throw new HttpException(
+                'Provider or material is not found. Cannot find products.',
+                HttpStatus.NOT_FOUND
+            )
+        }
+
+        return  await this.productRepository
+            .createQueryBuilder('product')
+            .where('product.provider.id = :providerId AND product.material.id = :materialId', { providerId, materialId })
+            .getMany();
+    }
+
     public getProductById(id: number): Promise<Product> {
         return this.productRepository.findOne({ where: { id }, relations: ['provider', 'material']});
     }

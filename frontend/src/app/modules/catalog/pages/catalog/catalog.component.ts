@@ -82,13 +82,13 @@ export class CatalogComponent implements OnInit {
         break;
       }
       case ROUTER_NAMES.MATERIALS : {
-        this.apiService.getAvailableMaterials(this.route.snapshot.params['provider']).subscribe(materials => {
+        this.apiService.getFilteredMaterials(this.route.snapshot.params['provider']).subscribe(materials => {
           this.materialsList = materials;
         });
         break;
       }
       case ROUTER_NAMES.PRODUCTS : {
-        this.apiService.getAvailableProducts(this.route.snapshot.params['provider'],this.route.snapshot.params['material']).subscribe(products => {
+        this.apiService.getFilteredProducts(this.route.snapshot.params['provider'],this.route.snapshot.params['material']).subscribe(products => {
           this.productsList = products;
         });
         break;

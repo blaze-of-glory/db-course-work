@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { ProductsService } from "./products.service";
 import { Product } from "./product.entity";
 import { ProductDetailsDto, ProductDto } from './dto/product.dto';
@@ -10,6 +10,11 @@ export class ProductsController {
     @Get()
     getAllProducts(): Promise<Product[]> {
         return this.productsService.getAllProducts();
+    }
+
+    @Get('filter')
+    getFilteredProducts(@Query() query: {providerId: number, materialId: number}, ) {
+        return this.productsService.getFilteredProducts(query.providerId, query.materialId);
     }
 
     @Get(':id')
