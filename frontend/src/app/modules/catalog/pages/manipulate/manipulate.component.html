@@ -1,6 +1,60 @@
 <h1 class="text-center">{{title}}</h1>
 <div class="container">
   <div [ngSwitch]="instance" class="d-flex flex-column">
+    <ng-template ngSwitchCase="provider">
+      <form [formGroup]="providerForm">
+        <div class="mb-3">
+          <label for="providerPhoto" class="form-label">Лого</label>
+          <input formControlName="img" class="form-control" id="providerPhoto" aria-describedby="providerPhotoHelp">
+          <div id="providerPhotoHelp" class="form-text">Укажите ссылку на лого провайдера</div>
+        </div>
+        <div class="mb-3">
+          <label for="providerTitle" class="form-label">Название</label>
+          <input formControlName="title" class="form-control" id="providerTitle">
+        </div>
+        <div class="mb-3">
+          <label for="providerSubtitle" class="form-label">Слоган</label>
+          <input formControlName="subtitle" class="form-control" id="providerSubtitle">
+        </div>
+        <div class="mb-3">
+          <label for="providerDescription" class="form-label">Описание</label>
+          <input formControlName="description" class="form-control" id="providerDescription">
+        </div>
+        <div class="mb-3">
+          <label for="providerFoundingDate" class="form-label">Год основания</label>
+          <input formControlName="foundingDate" class="form-control" id="providerFoundingDate">
+        </div>
+      </form>
+      <div class="d-flex justify-content-between">
+        <button (click)="manipulate()" [disabled]="isFormInvalid(shopForm)" class="btn btn-primary">Отправить</button>
+        <button (click)="goBackToAll(shopForm, ROUTER_LINKS.SHOPS)" class="btn btn-danger">Назад</button>
+      </div>
+    </ng-template>
+    <ng-template ngSwitchCase="shop">
+      <form [formGroup]="shopForm">
+        <div class="mb-3">
+          <label for="shopPhoto" class="form-label">Фото</label>
+          <input formControlName="img" class="form-control" id="shopPhoto" aria-describedby="shopPhotoHelp">
+          <div id="shopPhotoHelp" class="form-text">Укажите ссылку на фото магазина</div>
+        </div>
+        <div class="mb-3">
+          <label for="shopAddress" class="form-label">Адресс</label>
+          <input formControlName="address" class="form-control" id="shopAddress">
+        </div>
+        <div class="mb-3">
+          <label for="shopOpenTime" class="form-label">Время открытия</label>
+          <input formControlName="openTime" class="form-control" id="shopOpenTime">
+        </div>
+        <div class="mb-3">
+          <label for="shopCloseTime" class="form-label">Время закрытия</label>
+          <input formControlName="closeTime" class="form-control" id="shopCloseTime">
+        </div>
+      </form>
+      <div class="d-flex justify-content-between">
+        <button (click)="manipulate()" [disabled]="isFormInvalid(shopForm)" class="btn btn-primary">Отправить</button>
+        <button (click)="goBackToAll(shopForm, ROUTER_LINKS.SHOPS)" class="btn btn-danger">Назад</button>
+      </div>
+    </ng-template>
     <ng-template ngSwitchCase="employee">
       <form [formGroup]="employeeForm">
         <div class="mb-3">
@@ -32,31 +86,6 @@
       <div class="d-flex justify-content-between">
         <button (click)="manipulate()" [disabled]="isFormInvalid(employeeForm)" class="btn btn-primary">Отправить</button>
         <button (click)="goBackToAll(employeeForm, ROUTER_LINKS.EMPLOYEES)" class="btn btn-danger">Назад</button>
-      </div>
-    </ng-template>
-    <ng-template ngSwitchCase="shop">
-      <form [formGroup]="shopForm">
-        <div class="mb-3">
-          <label for="shopPhoto" class="form-label">Фото</label>
-          <input formControlName="img" class="form-control" id="shopPhoto" aria-describedby="shopPhotoHelp">
-          <div id="shopPhotoHelp" class="form-text">Укажите ссылку на фото магазина</div>
-        </div>
-        <div class="mb-3">
-          <label for="shopAddress" class="form-label">Адресс</label>
-          <input formControlName="address" class="form-control" id="shopAddress">
-        </div>
-        <div class="mb-3">
-          <label for="shopOpenTime" class="form-label">Время открытия</label>
-          <input formControlName="openTime" class="form-control" id="shopOpenTime">
-        </div>
-        <div class="mb-3">
-          <label for="shopCloseTime" class="form-label">Время закрытия</label>
-          <input formControlName="closeTime" class="form-control" id="shopCloseTime">
-        </div>
-      </form>
-      <div class="d-flex justify-content-between">
-        <button (click)="manipulate()" [disabled]="isFormInvalid(shopForm)" class="btn btn-primary">Отправить</button>
-        <button (click)="goBackToAll(shopForm, ROUTER_LINKS.SHOPS)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
   </div>

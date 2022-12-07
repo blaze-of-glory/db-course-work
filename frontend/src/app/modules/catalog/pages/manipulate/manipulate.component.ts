@@ -13,9 +13,10 @@ import { ItemService } from "../../../../core/item.service";
 })
 export class ManipulateComponent implements OnInit, OnDestroy{
   title!: string;
-  instance!: 'employee' | 'shop' | 'product';
+  instance!: 'employee' | 'shop' | 'provider' | 'product';
   employeeForm!: FormGroup;
   shopForm!: FormGroup;
+  providerForm!: FormGroup;
 
   public readonly ROUTER_LINKS = ROUTER_LINKS;
 
@@ -29,6 +30,18 @@ export class ManipulateComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     switch (this.route.snapshot.params['instance']) {
+      case 'provider' : {
+        this.title = 'Добавление нового поставщика';
+        this.instance = 'provider';
+        this.providerForm = this.fb.group({
+          img: [this.itemService.selectedProvider?.img, [Validators.required]],
+          title: [this.itemService.selectedProvider?.title, [Validators.required]],
+          subtitle: [this.itemService.selectedProvider?.subTitle, [Validators.required]],
+          description: [this.itemService.selectedProvider?.description, [Validators.required]],
+          foundingDate: [this.itemService.selectedProvider?.foundingDate, [Validators.required]]
+        });
+        break;
+      }
       case 'shop' : {
         this.title = this.route.routeConfig?.path === ROUTER_NAMES.ADD ? 'Добавление нового магазина' : 'Редактирование магазина';
         this.instance = 'shop';
@@ -57,11 +70,25 @@ export class ManipulateComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
+    this.itemService.selectedProvider = null;
     this.itemService.selectedShop = null;
+    this.itemService.selectedEmployee = null;
   }
 
   public manipulate(): void {
     switch (this.instance) {
+      case 'provider': {
+        if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
+          this.apiService.createProvider(this.providerForm.value).subscribe(() => {
+            this.goBackToAll(this.providerForm, ROUTER_LINKS.PROVIDERS);
+          });
+        } else {
+          this.apiService.editProvider(this.itemService.selectedProvider.id, this.providerForm.value).subscribe(() => {
+            this.goBackToAll(this.providerForm, ROUTER_LINKS.PROVIDERS);
+          })
+        }
+        break;
+      }
       case 'shop': {
         if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
           this.apiService.createShop(this.shopForm.value).subscribe(() => {

@@ -62,6 +62,14 @@ export class ApiService {
     return this.http.get<Provider[]>(this.apiEndpoint + '/providers');
   }
 
+  public createProvider(providerDetails: any): Observable<Provider> {
+    return this.http.post<Provider>(this.apiEndpoint + '/providers', providerDetails);
+  }
+
+  public editProvider(id: string, providerDetails: any): Observable<Provider> {
+    return this.http.post<Provider>(this.apiEndpoint + `/providers/${id}`, providerDetails);
+  }
+
   public getFilteredMaterials(providerId: string): Observable<Material[]> {
     return this.http.get<Material[]>(this.apiEndpoint + `/materials/filter?providerId=${providerId}`);
   }

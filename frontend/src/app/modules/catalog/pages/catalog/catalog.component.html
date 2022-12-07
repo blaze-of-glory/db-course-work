@@ -47,6 +47,9 @@
           </div>
         </div>
       </div>
+      <div>
+        <button [routerLink]="ROUTER_LINKS.ADD + '/provider'" class="btn btn-success ms-2 add">+</button>
+      </div>
     </ng-template>
     <ng-template ngSwitchCase="materials">
       <div *ngFor="let material of materialsList" class="col-3 mb-3">

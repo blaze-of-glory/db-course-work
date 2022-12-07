@@ -4,4 +4,5 @@ export interface Provider {
   title: string;
   subTitle: string;
   description: string;
+  foundingDate: string;
 }
