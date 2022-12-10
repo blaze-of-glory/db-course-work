@@ -98,4 +98,8 @@ export class ApiService {
     return this.http.put<Product>(this.apiEndpoint + `/products/${id}`, productDetails);
   }
 
+  public deleteProduct(id: string): Observable<string> {
+    return this.http.delete<string>(this.apiEndpoint + `/products/${id}`);
+  }
+
 }

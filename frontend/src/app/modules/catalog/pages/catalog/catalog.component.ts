@@ -105,7 +105,7 @@ export class CatalogComponent implements OnInit {
 
   public delete(id: string) {
     switch (this.route.snapshot.routeConfig?.path) {
-      case ROUTER_NAMES.SHOPS : {
+      case ROUTER_NAMES.SHOPS: {
         this.apiService.deleteShop(id).subscribe(() => {
           this.getAll();
         });
@@ -117,20 +117,30 @@ export class CatalogComponent implements OnInit {
         });
         break;
       }
+      case ROUTER_NAMES.PRODUCTS: {
+        this.apiService.deleteProduct(id).subscribe(() => {
+          this.getAll();
+        });
+        break;
+      }
     }
   }
 
   public edit(item: any) {
     switch (this.route.snapshot.routeConfig?.path) {
-      case ROUTER_NAMES.SHOPS : {
+      case ROUTER_NAMES.SHOPS: {
         this.itemService.selectedShop = item;
         this.router.navigate([this.ROUTER_LINKS.EDIT + '/shop']);
         break;
       }
-      case ROUTER_NAMES.EMPLOYEES : {
+      case ROUTER_NAMES.EMPLOYEES: {
         this.itemService.selectedEmployee = item;
         this.router.navigate([this.ROUTER_LINKS.EDIT + '/employee']);
         break;
+      }
+      case ROUTER_NAMES.PRODUCTS: {
+        this.itemService.selectedProduct = item;
+        this.router.navigate([this.ROUTER_LINKS.EDIT + '/product']);
       }
     }
   }

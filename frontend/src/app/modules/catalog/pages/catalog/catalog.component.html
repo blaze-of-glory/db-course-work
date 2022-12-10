@@ -71,9 +71,12 @@
         <div class="card" style="width: 18rem;">
           <img [src]="product?.img" alt="Фото изделия" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">{{product.title}}</h5>
+            <h5 [routerLink]="product.id" (click)="select(product)" class="card-title" role="button">{{product.title}}</h5>
             <p>{{product.description}}</p>
-            <a [routerLink]="product.id" (click)="select(product)" class="card-link" role="button">Подробнее</a>
+            <div class="d-flex justify-content-between mt-3">
+              <button class="btn btn-primary" (click)="edit(product)">Редактировать</button>
+              <button class="btn btn-danger" (click)="delete(product.id)">Удалить</button>
+            </div>
           </div>
         </div>
       </div>
