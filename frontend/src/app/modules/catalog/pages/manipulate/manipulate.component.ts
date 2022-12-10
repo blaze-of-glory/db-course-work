@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { ApiService } from "../../../../core/api.service";
 import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 import { ItemService } from "../../../../core/item.service";
@@ -18,11 +18,11 @@ export class ManipulateComponent implements OnInit, OnDestroy{
   shopForm!: FormGroup;
   providerForm!: FormGroup;
   materialForm!: FormGroup;
+  productForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
     private apiService: ApiService,
     private itemService: ItemService,
     private location: Location
@@ -76,11 +76,23 @@ export class ManipulateComponent implements OnInit, OnDestroy{
         });
         break;
       }
+      case 'product' : {
+        this.title = 'Добавление нового товара';
+        this.instance = 'product';
+        this.productForm = this.fb.group({
+          img: [this.itemService.selectedProduct?.img, [Validators.required]],
+          title: [this.itemService.selectedProduct?.title, [Validators.required]],
+          description: [this.itemService.selectedProduct?.description, [Validators.required]],
+          type: [this.itemService.selectedProduct?.type, [Validators.required]],
+          weight: [this.itemService.selectedProduct?.weight, [Validators.required]],
+          cost: [this.itemService.selectedProduct?.cost, [Validators.required]]
+        });
+        break;
+      }
     }
   }
 
   ngOnDestroy(): void {
-    this.itemService.selectedProvider = null;
     this.itemService.selectedShop = null;
     this.itemService.selectedEmployee = null;
   }
@@ -126,11 +138,11 @@ export class ManipulateComponent implements OnInit, OnDestroy{
       case 'material': {
         if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
           const materialData = {
-            materialDetails : this.materialForm.value,
+            materialDetails: this.materialForm.value,
             providerId: this.itemService.selectedProvider.id
           }
           this.apiService.createMaterial(materialData).subscribe(() => {
-            this.goBackToAll(this.materialForm)
+            this.goBackToAll(this.materialForm);
           });
         } else {
           this.apiService.editMaterial(this.itemService.selectedMaterial.id, this.materialForm.value).subscribe(() => {
@@ -138,6 +150,22 @@ export class ManipulateComponent implements OnInit, OnDestroy{
           })
         }
         break;
+      }
+      case 'product': {
+        if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
+          const productData = {
+            productDetails: this.productForm.value,
+            providerId: this.itemService.selectedProvider.id,
+            materialId: this.itemService.selectedMaterial.id
+          }
+          this.apiService.createProduct(productData).subscribe(() => {
+            this.goBackToAll(this.productForm);
+          });
+        } else {
+          this.apiService.editProduct(this.itemService.selectedProduct.id, this.materialForm.value).subscribe(() => {
+            this.goBackToAll(this.productForm);
+          })
+        }
       }
     }
   }

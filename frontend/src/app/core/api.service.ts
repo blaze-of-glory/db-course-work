@@ -67,7 +67,7 @@ export class ApiService {
   }
 
   public editProvider(id: string, providerDetails: any): Observable<Provider> {
-    return this.http.post<Provider>(this.apiEndpoint + `/providers/${id}`, providerDetails);
+    return this.http.put<Provider>(this.apiEndpoint + `/providers/${id}`, providerDetails);
   }
 
   public getFilteredMaterials(providerId: string): Observable<Material[]> {
@@ -79,11 +79,19 @@ export class ApiService {
   }
 
   public editMaterial(id: string, materialDetails: any): Observable<Material> {
-    return this.http.post<Material>(this.apiEndpoint + `/materials/${id}`, materialDetails);
+    return this.http.put<Material>(this.apiEndpoint + `/materials/${id}`, materialDetails);
   }
 
   public getFilteredProducts(providerId: string, materialId: string): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiEndpoint + `/products/filter?providerId=${providerId}&materialId=${materialId}`);
+  }
+
+  public createProduct(productDetails: any): Observable<Product> {
+    return this.http.post<Product>(this.apiEndpoint + '/products', productDetails);
+  }
+
+  public editProduct(id: string, productDetails: any): Observable<Product> {
+    return this.http.put<Product>(this.apiEndpoint + `/products/${id}`, productDetails);
   }
 
 }

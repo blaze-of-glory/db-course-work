@@ -109,5 +109,38 @@
         <button (click)="goBackToAll(materialForm)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
+    <ng-template ngSwitchCase="product">
+      <form [formGroup]="productForm">
+        <div class="mb-3">
+          <label for="productPhoto" class="form-label">Фото</label>
+          <input formControlName="img" class="form-control" id="productPhoto" aria-describedby="productPhotoHelp">
+          <div id="productPhotoHelp" class="form-text">Укажите ссылку на фото товара</div>
+        </div>
+        <div class="mb-3">
+          <label for="productTitle" class="form-label">Название</label>
+          <input formControlName="title" class="form-control" id="productTitle">
+        </div>
+        <div class="mb-3">
+          <label for="productDescription" class="form-label">Описание</label>
+          <input formControlName="description" class="form-control" id="productDescription">
+        </div>
+        <div class="mb-3">
+          <label for="productType" class="form-label">Тип</label>
+          <input formControlName="type" class="form-control" id="productType">
+        </div>
+        <div class="mb-3">
+          <label for="productWeight" class="form-label">Вес</label>
+          <input formControlName="weight" class="form-control" id="productWeight">
+        </div>
+        <div class="mb-3">
+          <label for="productCost" class="form-label">Цена</label>
+          <input formControlName="cost" class="form-control" id="productCost">
+        </div>
+      </form>
+      <div class="d-flex justify-content-between">
+        <button (click)="manipulate()" [disabled]="isFormInvalid(productForm)" class="btn btn-primary">Отправить</button>
+        <button (click)="goBackToAll(productForm)" class="btn btn-danger">Назад</button>
+      </div>
+    </ng-template>
   </div>
 </div>

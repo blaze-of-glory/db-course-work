@@ -43,7 +43,7 @@
           <div class="card-body">
             <h5 class="card-title">{{provider.title}}</h5>
             <p>{{provider.description}}</p>
-            <a (click)="select(provider)" class="card-link" role="button">Подробнее</a>
+            <a [routerLink]="provider.id" (click)="select(provider)" class="card-link" role="button">Подробнее</a>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
           <div class="card-body">
             <h5 class="card-title">{{material.title}}</h5>
             <p>{{material.description}}</p>
-            <a (click)="select(material)" class="card-link" role="button">Подробнее</a>
+            <a [routerLink]="material.id" (click)="select(material)" class="card-link" role="button">Подробнее</a>
           </div>
         </div>
       </div>
@@ -73,9 +73,12 @@
           <div class="card-body">
             <h5 class="card-title">{{product.title}}</h5>
             <p>{{product.description}}</p>
-            <a (click)="select(product)" class="card-link" role="button">Подробнее</a>
+            <a [routerLink]="product.id" (click)="select(product)" class="card-link" role="button">Подробнее</a>
           </div>
         </div>
+      </div>
+      <div>
+        <button [routerLink]="ROUTER_LINKS.ADD + '/product'" class="btn btn-success ms-2 add">+</button>
       </div>
     </ng-template>
   </div>

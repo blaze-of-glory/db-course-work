@@ -139,12 +139,10 @@ export class CatalogComponent implements OnInit {
     switch (this.route.snapshot.routeConfig?.path) {
       case ROUTER_NAMES.PROVIDERS : {
         this.itemService.selectedProvider = item;
-        this.router.navigate([this.ROUTER_LINKS.PROVIDERS + `/${item.id}`]);
         break;
       }
       case ROUTER_NAMES.MATERIALS : {
         this.itemService.selectedMaterial = item;
-        this.router.navigate([this.ROUTER_LINKS.MATERIALS + `/${item.id}`]);
         break;
       }
     }
