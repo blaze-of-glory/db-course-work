@@ -17,7 +17,6 @@ import { ItemService } from "../../../../core/item.service";
 })
 export class CatalogComponent implements OnInit {
   public pageTitle!: string;
-  public buttonText!: string;
   public providersList!: Provider[];
   public materialsList!: Material[];
   public productsList!: Product[];
@@ -39,28 +38,24 @@ export class CatalogComponent implements OnInit {
       case ROUTER_NAMES.PROVIDERS : {
         this.catalogType = 'providers';
         this.pageTitle = 'Список поставщиков';
-        this.buttonText = 'Просмотреть всех';
         this.getAll();
         break;
       }
       case ROUTER_NAMES.MATERIALS : {
         this.catalogType = 'materials';
         this.pageTitle = 'Список материалов';
-        this.buttonText = 'Просмотреть все';
         this.getAll();
         break;
       }
       case ROUTER_NAMES.PRODUCTS : {
         this.catalogType = 'products';
         this.pageTitle = 'Список изделий';
-        this.buttonText = 'Подробней';
         this.getAll();
         break;
       }
       case ROUTER_NAMES.EMPLOYEES : {
         this.catalogType = 'employees';
         this.pageTitle = 'Список сотрудников';
-        this.buttonText = 'Подробней';
         this.getAll();
         break;
       }
@@ -135,6 +130,21 @@ export class CatalogComponent implements OnInit {
       case ROUTER_NAMES.EMPLOYEES : {
         this.itemService.selectedEmployee = item;
         this.router.navigate([this.ROUTER_LINKS.EDIT + '/employee']);
+        break;
+      }
+    }
+  }
+
+  select(item: any) {
+    switch (this.route.snapshot.routeConfig?.path) {
+      case ROUTER_NAMES.PROVIDERS : {
+        this.itemService.selectedProvider = item;
+        this.router.navigate([this.ROUTER_LINKS.PROVIDERS + `/${item.id}`]);
+        break;
+      }
+      case ROUTER_NAMES.MATERIALS : {
+        this.itemService.selectedMaterial = item;
+        this.router.navigate([this.ROUTER_LINKS.MATERIALS + `/${item.id}`]);
         break;
       }
     }

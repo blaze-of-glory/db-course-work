@@ -43,7 +43,7 @@
           <div class="card-body">
             <h5 class="card-title">{{provider.title}}</h5>
             <p>{{provider.description}}</p>
-            <a [routerLink]="provider.id" class="card-link">{{buttonText}}</a>
+            <a (click)="select(provider)" class="card-link" role="button">Подробнее</a>
           </div>
         </div>
       </div>
@@ -58,9 +58,12 @@
           <div class="card-body">
             <h5 class="card-title">{{material.title}}</h5>
             <p>{{material.description}}</p>
-            <a [routerLink]="material.id" class="card-link">{{buttonText}}</a>
+            <a (click)="select(material)" class="card-link" role="button">Подробнее</a>
           </div>
         </div>
+      </div>
+      <div>
+        <button [routerLink]="ROUTER_LINKS.ADD + '/material'" class="btn btn-success ms-2 add">+</button>
       </div>
     </ng-template>
     <ng-template ngSwitchCase="products">
@@ -70,7 +73,7 @@
           <div class="card-body">
             <h5 class="card-title">{{product.title}}</h5>
             <p>{{product.description}}</p>
-            <a [routerLink]="product.id" class="card-link">{{buttonText}}</a>
+            <a (click)="select(product)" class="card-link" role="button">Подробнее</a>
           </div>
         </div>
       </div>
