@@ -61,7 +61,7 @@ export class ManipulateComponent implements OnInit {
         this.form = this.fb.group({
           img: [this.itemService.selectedProvider?.img, [Validators.required]],
           title: [this.itemService.selectedProvider?.title, [Validators.required]],
-          subtitle: [this.itemService.selectedProvider?.subTitle, [Validators.required]],
+          subtitle: [this.itemService.selectedProvider?.subtitle, [Validators.required]],
           description: [this.itemService.selectedProvider?.description, [Validators.required]],
           foundingDate: [this.itemService.selectedProvider?.foundingDate, [Validators.required]]
         });

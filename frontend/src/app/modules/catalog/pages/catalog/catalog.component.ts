@@ -138,6 +138,16 @@ export class CatalogComponent implements OnInit {
         this.router.navigate([this.ROUTER_LINKS.EDIT + '/employee']);
         break;
       }
+      case ROUTER_NAMES.PROVIDERS: {
+        this.itemService.selectedProvider = item;
+        this.router.navigate([this.ROUTER_LINKS.EDIT + '/provider']);
+        break
+      }
+      case ROUTER_NAMES.MATERIALS: {
+        this.itemService.selectedMaterial = item;
+        this.router.navigate([this.ROUTER_LINKS.EDIT + '/material']);
+        break;
+      }
       case ROUTER_NAMES.PRODUCTS: {
         this.itemService.selectedProduct = item;
         this.router.navigate([this.ROUTER_LINKS.EDIT + '/product']);

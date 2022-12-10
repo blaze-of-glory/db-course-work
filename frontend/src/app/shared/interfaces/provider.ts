@@ -2,7 +2,7 @@ export interface Provider {
   id: string;
   img: string;
   title: string;
-  subTitle: string;
+  subtitle: string;
   description: string;
   foundingDate: string;
 }

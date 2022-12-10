@@ -6,7 +6,7 @@
         <div class="card" style="width: 18rem;">
           <img [src]="employee?.img" alt="Фото сотрудника" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title" [routerLink]="employee.id" role="button">{{employee.name}} {{employee.surname}}</h5>
+            <h5 class="card-title" [routerLink]="employee.id">{{employee.name}} {{employee.surname}}</h5>
             <div class="d-flex justify-content-between mt-3">
               <button class="btn btn-primary" (click)="edit(employee)">Редактировать</button>
               <button class="btn btn-danger" (click)="delete(employee.id)">Удалить</button>
@@ -41,9 +41,13 @@
         <div class="card" style="width: 18rem;">
           <img [src]="provider?.img" alt="Логотип поставщика" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">{{provider.title}}</h5>
+            <h5 [routerLink]="provider.id" (click)="select(provider)" class="card-title">{{provider.title}}</h5>
+            <h6 class="text-center">{{provider.subtitle}}</h6>
             <p>{{provider.description}}</p>
-            <a [routerLink]="provider.id" (click)="select(provider)" class="card-link" role="button">Подробнее</a>
+            <div class="d-flex justify-content-between mt-3">
+              <button class="btn btn-primary" (click)="edit(provider)">Редактировать</button>
+              <button class="btn btn-danger" (click)="delete(provider.id)">Удалить</button>
+            </div>
           </div>
         </div>
       </div>
@@ -56,9 +60,12 @@
         <div class="card" style="width: 18rem;">
           <img [src]="material?.img" alt="Фото материала" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">{{material.title}}</h5>
+            <h5 [routerLink]="material.id" (click)="select(material)" class="card-title">{{material.title}}</h5>
             <p>{{material.description}}</p>
-            <a [routerLink]="material.id" (click)="select(material)" class="card-link" role="button">Подробнее</a>
+            <div class="d-flex justify-content-between mt-3">
+              <button class="btn btn-primary" (click)="edit(material)">Редактировать</button>
+              <button class="btn btn-danger" (click)="delete(material.id)">Удалить</button>
+            </div>
           </div>
         </div>
       </div>
@@ -71,7 +78,7 @@
         <div class="card" style="width: 18rem;">
           <img [src]="product?.img" alt="Фото изделия" class="card-img-top">
           <div class="card-body">
-            <h5 [routerLink]="product.id" (click)="select(product)" class="card-title" role="button">{{product.title}}</h5>
+            <h5 [routerLink]="product.id" class="card-title">{{product.title}}</h5>
             <p>{{product.description}}</p>
             <div class="d-flex justify-content-between mt-3">
               <button class="btn btn-primary" (click)="edit(product)">Редактировать</button>
