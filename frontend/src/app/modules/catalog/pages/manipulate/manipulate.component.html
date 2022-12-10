@@ -2,7 +2,7 @@
 <div class="container">
   <div [ngSwitch]="instance" class="d-flex flex-column">
     <ng-template ngSwitchCase="employee">
-      <form [formGroup]="employeeForm">
+      <form [formGroup]="form">
         <div class="mb-3">
           <label for="employeePhoto" class="form-label">Фото</label>
           <input formControlName="img" class="form-control" id="employeePhoto" aria-describedby="employeePhotoHelp">
@@ -30,12 +30,12 @@
         </div>
       </form>
       <div class="d-flex justify-content-between">
-        <button (click)="manipulate()" [disabled]="isFormInvalid(employeeForm)" class="btn btn-primary">Отправить</button>
-        <button (click)="goBackToAll(employeeForm)" class="btn btn-danger">Назад</button>
+        <button (click)="manipulate()" [disabled]="isFormInvalid(form)" class="btn btn-primary">Отправить</button>
+        <button (click)="goBackToAll(form)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
     <ng-template ngSwitchCase="shop">
-      <form [formGroup]="shopForm">
+      <form [formGroup]="form">
         <div class="mb-3">
           <label for="shopPhoto" class="form-label">Фото</label>
           <input formControlName="img" class="form-control" id="shopPhoto" aria-describedby="shopPhotoHelp">
@@ -55,12 +55,12 @@
         </div>
       </form>
       <div class="d-flex justify-content-between">
-        <button (click)="manipulate()" [disabled]="isFormInvalid(shopForm)" class="btn btn-primary">Отправить</button>
-        <button (click)="goBackToAll(shopForm)" class="btn btn-danger">Назад</button>
+        <button (click)="manipulate()" [disabled]="isFormInvalid(form)" class="btn btn-primary">Отправить</button>
+        <button (click)="goBackToAll(form)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
     <ng-template ngSwitchCase="provider">
-      <form [formGroup]="providerForm">
+      <form [formGroup]="form">
         <div class="mb-3">
           <label for="providerPhoto" class="form-label">Лого</label>
           <input formControlName="img" class="form-control" id="providerPhoto" aria-describedby="providerPhotoHelp">
@@ -84,12 +84,12 @@
         </div>
       </form>
       <div class="d-flex justify-content-between">
-        <button (click)="manipulate()" [disabled]="isFormInvalid(providerForm)" class="btn btn-primary">Отправить</button>
-        <button (click)="goBackToAll(providerForm)" class="btn btn-danger">Назад</button>
+        <button (click)="manipulate()" [disabled]="isFormInvalid(form)" class="btn btn-primary">Отправить</button>
+        <button (click)="goBackToAll(form)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
     <ng-template ngSwitchCase="material">
-      <form [formGroup]="materialForm">
+      <form [formGroup]="form">
         <div class="mb-3">
           <label for="materialPhoto" class="form-label">Фото</label>
           <input formControlName="img" class="form-control" id="materialPhoto" aria-describedby="materialPhotoHelp">
@@ -105,12 +105,12 @@
         </div>
       </form>
       <div class="d-flex justify-content-between">
-        <button (click)="manipulate()" [disabled]="isFormInvalid(materialForm)" class="btn btn-primary">Отправить</button>
-        <button (click)="goBackToAll(materialForm)" class="btn btn-danger">Назад</button>
+        <button (click)="manipulate()" [disabled]="isFormInvalid(form)" class="btn btn-primary">Отправить</button>
+        <button (click)="goBackToAll(form)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
     <ng-template ngSwitchCase="product">
-      <form [formGroup]="productForm">
+      <form [formGroup]="form">
         <div class="mb-3">
           <label for="productPhoto" class="form-label">Фото</label>
           <input formControlName="img" class="form-control" id="productPhoto" aria-describedby="productPhotoHelp">
@@ -138,8 +138,8 @@
         </div>
       </form>
       <div class="d-flex justify-content-between">
-        <button (click)="manipulate()" [disabled]="isFormInvalid(productForm)" class="btn btn-primary">Отправить</button>
-        <button (click)="goBackToAll(productForm)" class="btn btn-danger">Назад</button>
+        <button (click)="manipulate()" [disabled]="isFormInvalid(form)" class="btn btn-primary">Отправить</button>
+        <button (click)="goBackToAll(form)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
   </div>

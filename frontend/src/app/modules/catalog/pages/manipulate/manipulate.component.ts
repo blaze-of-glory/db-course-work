@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from "../../../../core/api.service";
 import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
+import { ROUTER_LINKS } from '../../../../shared/constants/router-links';
 import { ItemService } from "../../../../core/item.service";
 import { Location } from '@angular/common'
 
@@ -11,29 +12,27 @@ import { Location } from '@angular/common'
   templateUrl: './manipulate.component.html',
   styleUrls: ['./manipulate.component.scss']
 })
-export class ManipulateComponent implements OnInit, OnDestroy{
+export class ManipulateComponent implements OnInit {
   title!: string;
   instance!: 'employee' | 'shop' | 'provider' | 'material' | 'product';
-  employeeForm!: FormGroup;
-  shopForm!: FormGroup;
-  providerForm!: FormGroup;
-  materialForm!: FormGroup;
-  productForm!: FormGroup;
+  form!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private apiService: ApiService,
     private itemService: ItemService,
-    private location: Location
+    private location: Location,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
     switch (this.route.snapshot.params['instance']) {
       case 'employee' : {
+        this.availabilityChecker(this.itemService.selectedEmployee);
         this.title = 'Добавить нового сотрудника';
         this.instance = 'employee';
-        this.employeeForm = this.fb.group({
+        this.form = this.fb.group({
           img: [this.itemService.selectedEmployee?.img, [Validators.required]],
           name: [this.itemService.selectedEmployee?.name, [Validators.required]],
           surname: [this.itemService.selectedEmployee?.surname, [Validators.required]],
@@ -44,9 +43,10 @@ export class ManipulateComponent implements OnInit, OnDestroy{
         break;
       }
       case 'shop' : {
+        this.availabilityChecker(this.itemService.selectedShop);
         this.title = this.route.routeConfig?.path === ROUTER_NAMES.ADD ? 'Добавление нового магазина' : 'Редактирование магазина';
         this.instance = 'shop';
-        this.shopForm = this.fb.group({
+        this.form = this.fb.group({
           img: [this.itemService.selectedShop?.img, [Validators.required]],
           address: [this.itemService.selectedShop?.address, [Validators.required]],
           openTime: [this.itemService.selectedShop?.openTime, [Validators.required]],
@@ -55,9 +55,10 @@ export class ManipulateComponent implements OnInit, OnDestroy{
         break;
       }
       case 'provider' : {
+        this.availabilityChecker(this.itemService.selectedProvider);
         this.title = 'Добавление нового поставщика';
         this.instance = 'provider';
-        this.providerForm = this.fb.group({
+        this.form = this.fb.group({
           img: [this.itemService.selectedProvider?.img, [Validators.required]],
           title: [this.itemService.selectedProvider?.title, [Validators.required]],
           subtitle: [this.itemService.selectedProvider?.subTitle, [Validators.required]],
@@ -67,9 +68,10 @@ export class ManipulateComponent implements OnInit, OnDestroy{
         break;
       }
       case 'material' : {
+        this.availabilityChecker(this.itemService.selectedMaterial,this.itemService.selectedProvider, this.itemService.selectedMaterial);
         this.title = 'Добавление нового материала';
         this.instance = 'material';
-        this.materialForm = this.fb.group({
+        this.form = this.fb.group({
           img: [this.itemService.selectedMaterial?.img, [Validators.required]],
           title: [this.itemService.selectedMaterial?.title, [Validators.required]],
           description: [this.itemService.selectedMaterial?.description, [Validators.required]]
@@ -77,9 +79,10 @@ export class ManipulateComponent implements OnInit, OnDestroy{
         break;
       }
       case 'product' : {
+        this.availabilityChecker(this.itemService.selectedProduct,this.itemService.selectedProvider, this.itemService.selectedMaterial);
         this.title = 'Добавление нового товара';
         this.instance = 'product';
-        this.productForm = this.fb.group({
+        this.form = this.fb.group({
           img: [this.itemService.selectedProduct?.img, [Validators.required]],
           title: [this.itemService.selectedProduct?.title, [Validators.required]],
           description: [this.itemService.selectedProduct?.description, [Validators.required]],
@@ -90,47 +93,46 @@ export class ManipulateComponent implements OnInit, OnDestroy{
         break;
       }
     }
-  }
 
-  ngOnDestroy(): void {
-    this.itemService.selectedShop = null;
-    this.itemService.selectedEmployee = null;
+    if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
+      this.form.reset();
+    }
   }
 
   public manipulate(): void {
     switch (this.instance) {
       case 'employee': {
         if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
-          this.apiService.createEmployee(this.employeeForm.value).subscribe(() => {
-            this.goBackToAll(this.employeeForm);
+          this.apiService.createEmployee(this.form.value).subscribe(() => {
+            this.goBackToAll(this.form);
           });
         } else {
-          this.apiService.editEmployee(this.itemService.selectedEmployee.id, this.employeeForm.value).subscribe(() => {
-            this.goBackToAll(this.employeeForm);
+          this.apiService.editEmployee(this.itemService.selectedEmployee.id, this.form.value).subscribe(() => {
+            this.goBackToAll(this.form);
           })
         }
         break;
       }
       case 'shop': {
         if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
-          this.apiService.createShop(this.shopForm.value).subscribe(() => {
-            this.goBackToAll(this.shopForm);
+          this.apiService.createShop(this.form.value).subscribe(() => {
+            this.goBackToAll(this.form);
           });
         } else {
-          this.apiService.editShop(this.itemService.selectedShop.id, this.shopForm.value).subscribe(() => {
-            this.goBackToAll(this.shopForm);
+          this.apiService.editShop(this.itemService.selectedShop.id, this.form.value).subscribe(() => {
+            this.goBackToAll(this.form);
           })
         }
         break;
       }
       case 'provider': {
         if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
-          this.apiService.createProvider(this.providerForm.value).subscribe(() => {
-            this.goBackToAll(this.providerForm);
+          this.apiService.createProvider(this.form.value).subscribe(() => {
+            this.goBackToAll(this.form);
           });
         } else {
-          this.apiService.editProvider(this.itemService.selectedProvider.id, this.providerForm.value).subscribe(() => {
-            this.goBackToAll(this.providerForm);
+          this.apiService.editProvider(this.itemService.selectedProvider.id, this.form.value).subscribe(() => {
+            this.goBackToAll(this.form);
           })
         }
         break;
@@ -138,15 +140,15 @@ export class ManipulateComponent implements OnInit, OnDestroy{
       case 'material': {
         if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
           const materialData = {
-            materialDetails: this.materialForm.value,
+            materialDetails: this.form.value,
             providerId: this.itemService.selectedProvider.id
           }
           this.apiService.createMaterial(materialData).subscribe(() => {
-            this.goBackToAll(this.materialForm);
+            this.goBackToAll(this.form);
           });
         } else {
-          this.apiService.editMaterial(this.itemService.selectedMaterial.id, this.materialForm.value).subscribe(() => {
-            this.goBackToAll(this.materialForm);
+          this.apiService.editMaterial(this.itemService.selectedMaterial.id, this.form.value).subscribe(() => {
+            this.goBackToAll(this.form);
           })
         }
         break;
@@ -154,16 +156,16 @@ export class ManipulateComponent implements OnInit, OnDestroy{
       case 'product': {
         if (this.route.routeConfig?.path === ROUTER_NAMES.ADD) {
           const productData = {
-            productDetails: this.productForm.value,
+            productDetails: this.form.value,
             providerId: this.itemService.selectedProvider.id,
             materialId: this.itemService.selectedMaterial.id
           }
           this.apiService.createProduct(productData).subscribe(() => {
-            this.goBackToAll(this.productForm);
+            this.goBackToAll(this.form);
           });
         } else {
-          this.apiService.editProduct(this.itemService.selectedProduct.id, this.materialForm.value).subscribe(() => {
-            this.goBackToAll(this.productForm);
+          this.apiService.editProduct(this.itemService.selectedProduct.id, this.form.value).subscribe(() => {
+            this.goBackToAll(this.form);
           })
         }
       }
@@ -177,5 +179,15 @@ export class ManipulateComponent implements OnInit, OnDestroy{
 
   public isFormInvalid(form: FormGroup): boolean {
     return form.invalid;
+  }
+
+  private availabilityChecker(instance: any, provider: any = true, material: any = true) {
+    if (this.route.routeConfig?.path === ROUTER_NAMES.ADD && !provider && !material) {
+      this.router.navigate([ROUTER_LINKS.HOME])
+    }
+
+    if (this.route.routeConfig?.path === ROUTER_NAMES.EDIT && !instance) {
+      this.router.navigate([ROUTER_LINKS.HOME])
+    }
   }
 }
