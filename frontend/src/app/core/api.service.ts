@@ -86,6 +86,10 @@ export class ApiService {
     return this.http.get<Product[]>(this.apiEndpoint + `/products/filter?providerId=${providerId}&materialId=${materialId}`);
   }
 
+  getProductById(id: string): Observable<Product> {
+    return this.http.get<Product>(this.apiEndpoint + `/products/${id}`);
+  }
+
   public createProduct(productDetails: any): Observable<Product> {
     return this.http.post<Product>(this.apiEndpoint + '/products', productDetails);
   }

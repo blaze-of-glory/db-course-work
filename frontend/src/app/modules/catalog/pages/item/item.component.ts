@@ -26,7 +26,9 @@ export class ItemComponent implements OnInit{
     switch (this.route.snapshot.routeConfig?.path) {
       case ROUTER_NAMES.PRODUCT : {
         this.itemType = 'product';
-        this.product = this.itemService.selectedProduct;
+        this.apiService.getProductById(this.route.snapshot.params['product']).subscribe(selectedProduct => {
+          this.product = selectedProduct;
+        });
         break;
       }
       case ROUTER_NAMES.EMPLOYEE : {
