@@ -3,6 +3,15 @@
   font-size: 30px;
 }
 
-.card-title {
-  cursor: pointer;
+.card {
+  .card-title {
+    cursor: pointer;
+  }
+  .card-img-top {
+    height: 215px;
+    width: 285px;
+  }
+  .btn-danger {
+    margin-left: 1em;
+  }
 }
