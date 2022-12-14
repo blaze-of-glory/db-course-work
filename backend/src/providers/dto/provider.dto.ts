@@ -1,4 +1,4 @@
-export class UpdateProviderDto {
+export class ProviderDto {
     title: string;
     subtitle: string;
     img: string;

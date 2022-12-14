@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Provider } from "./provider.entity";
 import { DeleteResult, Repository, UpdateResult } from "typeorm";
-import { CreateProviderDto } from "./dto/create-provider.dto";
-import { UpdateProviderDto } from "./dto/update-provider.dto";
+import { ProviderDto } from "./dto/provider.dto";
 
 @Injectable()
 export class ProvidersService {
@@ -18,7 +17,7 @@ export class ProvidersService {
         return this.providerRepository.findOne({ where: { id }, relations: ['materials', 'products'] });
     }
 
-    public createProvider(providerDetails: CreateProviderDto): Promise<Provider> {
+    public createProvider(providerDetails: ProviderDto): Promise<Provider> {
         if (!Object.keys(providerDetails).length) {
             return null;
         }
@@ -26,7 +25,7 @@ export class ProvidersService {
         return this.providerRepository.save(newProvider);
     }
 
-    public updateProvider(id: number, updatedProviderDetails: UpdateProviderDto): Promise<UpdateResult> {
+    public updateProvider(id: number, updatedProviderDetails: ProviderDto): Promise<UpdateResult> {
         return this.providerRepository.update({ id }, { ...updatedProviderDetails });
     }
 

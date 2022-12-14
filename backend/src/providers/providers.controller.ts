@@ -1,8 +1,7 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { ProvidersService } from "./providers.service";
 import { Provider } from "./provider.entity";
-import { CreateProviderDto } from "./dto/create-provider.dto";
-import { UpdateProviderDto } from "./dto/update-provider.dto";
+import { ProviderDto } from "./dto/provider.dto";
 
 @Controller('providers')
 export class ProvidersController {
@@ -20,12 +19,12 @@ export class ProvidersController {
     }
 
     @Post()
-    createProvider(@Body() createProviderDetails: CreateProviderDto): Promise<Provider> {
+    createProvider(@Body() createProviderDetails: ProviderDto): Promise<Provider> {
         return this.providersService.createProvider(createProviderDetails);
     }
 
     @Put(':id')
-    async updateProviderById(@Param('id', ParseIntPipe) id: number, @Body() updatedProviderDetails: UpdateProviderDto): Promise<Provider> {
+    async updateProviderById(@Param('id', ParseIntPipe) id: number, @Body() updatedProviderDetails: ProviderDto): Promise<Provider> {
         await this.providersService.updateProvider(id, updatedProviderDetails);
         return this.providersService.getProviderById(id);
     }

@@ -19,7 +19,7 @@ export class Provider {
     @Column({type: 'varchar'})
     description: string;
 
-    @Column({type: 'varchar', length: '32'})
+    @Column({type: 'date'})
     foundingDate: string;
 
     @OneToMany(() => Product, product => product.provider)
