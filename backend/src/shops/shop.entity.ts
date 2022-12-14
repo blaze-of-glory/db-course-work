@@ -11,9 +11,9 @@ export class Shop {
     @Column({type: 'varchar', length: '64'})
     address: string;
 
-    @Column({type: 'varchar', length: '6'})
+    @Column({type: 'time'})
     openTime: string;
 
-    @Column({type: 'varchar', length: '6'})
+    @Column({type: 'time'})
     closeTime: string;
 }

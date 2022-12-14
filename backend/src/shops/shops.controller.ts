@@ -1,8 +1,7 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { ShopsService } from "./shops.service";
 import { Shop } from "./shop.entity";
-import { CreateShopDto } from "./dto/create-shop.dto";
-import { UpdateShopDto } from "./dto/update-shop.dto";
+import { ShopDto } from "./dto/shop.dto";
 
 @Controller('shops')
 export class ShopsController {
@@ -14,12 +13,12 @@ export class ShopsController {
     }
 
     @Post()
-    createShop(@Body() createShopDto: CreateShopDto): Promise<Shop> {
+    createShop(@Body() createShopDto: ShopDto): Promise<Shop> {
         return this.shopsService.createShop(createShopDto);
     }
 
     @Put(':id')
-    async updateShopById(@Param('id', ParseIntPipe) id: number, @Body() updateShopDto: UpdateShopDto): Promise<Shop> {
+    async updateShopById(@Param('id', ParseIntPipe) id: number, @Body() updateShopDto: ShopDto): Promise<Shop> {
        await this.shopsService.updateShop(id,updateShopDto);
        return this.shopsService.getShopById(id);
     }

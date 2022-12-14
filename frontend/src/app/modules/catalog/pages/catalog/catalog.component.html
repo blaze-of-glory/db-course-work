@@ -24,7 +24,7 @@
           <img [src]="shop?.img" alt="Фото магазина" class="card-img-top">
           <div class="card-body">
             <p>Адресс: {{shop.address}}</p>
-            <h5 class="card-title">с {{shop.openTime}} до {{shop.closeTime}}</h5>
+            <h5 class="card-title">с {{ shop.openTime.slice(0, 5) }} до {{ shop.closeTime.slice(0, 5) }}</h5>
             <div class="d-flex justify-content-center mt-3">
               <button class="btn btn-primary" (click)="edit(shop)">Редактировать</button>
               <button class="btn btn-danger" (click)="delete(shop.id)">Удалить</button>

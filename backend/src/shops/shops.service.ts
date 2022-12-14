@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import {DeleteResult, Repository, UpdateResult} from "typeorm";
 import { Shop } from "./shop.entity";
-import { CreateShopDto } from "./dto/create-shop.dto";
-import { UpdateShopDto } from "./dto/update-shop.dto";
+import { ShopDto } from "./dto/shop.dto";
 
 @Injectable()
 export class ShopsService {
@@ -18,7 +17,7 @@ export class ShopsService {
         return this.shopRepository.findOneBy({ id });
     }
 
-    public createShop(shopDetails: CreateShopDto): Promise<Shop> {
+    public createShop(shopDetails: ShopDto): Promise<Shop> {
         if (!Object.keys(shopDetails).length) {
             return null;
         }
@@ -26,7 +25,7 @@ export class ShopsService {
         return this.shopRepository.save(newShop);
     }
 
-    public updateShop(id: number, updateShopDetails: UpdateShopDto): Promise<UpdateResult> {
+    public updateShop(id: number, updateShopDetails: ShopDto): Promise<UpdateResult> {
         return this.shopRepository.update({ id }, { ...updateShopDetails });
     }
 
