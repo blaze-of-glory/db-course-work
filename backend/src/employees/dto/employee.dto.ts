@@ -1,8 +1,8 @@
-export class UpdateEmployeeDto {
+export class EmployeeDto {
     img: string;
     name: string;
     surname: string;
-    age: string;
+    age: number;
     position: string;
-    salary: string;
+    salary: number;
 }

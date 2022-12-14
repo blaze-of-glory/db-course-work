@@ -1,8 +1,7 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { Employee } from "./employee.entity";
 import { EmployeesService } from "./employees.service";
-import { CreateEmployeeDto } from "./dto/create-employee.dto";
-import { UpdateEmployeeDto } from "./dto/update-employee.dto";
+import { EmployeeDto } from "./dto/employee.dto";
 
 @Controller('employees')
 export class EmployeesController {
@@ -19,12 +18,12 @@ export class EmployeesController {
     }
 
     @Post()
-    createEmployee(@Body() createEmployeeDto: CreateEmployeeDto): Promise<Employee> {
+    createEmployee(@Body() createEmployeeDto: EmployeeDto): Promise<Employee> {
         return this.employeesService.createEmployee(createEmployeeDto);
     }
 
     @Put(':id')
-    async updateEmployeeById(@Param('id', ParseIntPipe) id: number, @Body() updateEmployeeDto: UpdateEmployeeDto): Promise<Employee> {
+    async updateEmployeeById(@Param('id', ParseIntPipe) id: number, @Body() updateEmployeeDto: EmployeeDto): Promise<Employee> {
         await this.employeesService.updateEmployee(id, updateEmployeeDto);
         return this.employeesService.getEmployeeById(id);
     }

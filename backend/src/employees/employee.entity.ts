@@ -14,12 +14,12 @@ export class Employee {
     @Column({type: 'varchar', length: '32'})
     surname: string;
 
-    @Column({type: 'varchar', length: '2'})
-    age: string;
+    @Column({type: 'tinyint'})
+    age: number;
 
     @Column({type: 'varchar', length: '64'})
     position: string;
 
-    @Column({type: 'varchar', length: '12'})
-    salary: string;
+    @Column({type: 'smallint'})
+    salary: number;
 }

@@ -3,7 +3,7 @@ export interface Employee {
   img: string,
   name: string;
   surname: string;
-  age: string;
+  age: number;
   position: string;
-  salary: string;
+  salary: number;
 }
