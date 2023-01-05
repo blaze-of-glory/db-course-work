@@ -30,7 +30,7 @@ export class ManipulateComponent implements OnInit {
     switch (this.route.snapshot.params['instance']) {
       case 'employee' : {
         this.availabilityChecker(this.itemService.selectedEmployee);
-        this.title = 'Добавить нового сотрудника';
+        this.title = this.route.routeConfig?.path === ROUTER_NAMES.ADD ? 'Добавить нового сотрудника' : 'Редактировать сотрудника';
         this.instance = 'employee';
         this.form = this.fb.group({
           img: [this.itemService.selectedEmployee?.img, [Validators.required]],
@@ -56,7 +56,7 @@ export class ManipulateComponent implements OnInit {
       }
       case 'provider' : {
         this.availabilityChecker(this.itemService.selectedProvider);
-        this.title = 'Добавление нового поставщика';
+        this.title = this.route.routeConfig?.path === ROUTER_NAMES.ADD ? 'Добавление нового поставщика' : 'Редактирование поставщика';
         this.instance = 'provider';
         this.form = this.fb.group({
           img: [this.itemService.selectedProvider?.img, [Validators.required]],
@@ -69,7 +69,7 @@ export class ManipulateComponent implements OnInit {
       }
       case 'material' : {
         this.availabilityChecker(this.itemService.selectedMaterial,this.itemService.selectedProvider, this.itemService.selectedMaterial);
-        this.title = 'Добавление нового материала';
+        this.title = this.route.routeConfig?.path === ROUTER_NAMES.ADD ? 'Добавление нового материала' : 'Редактирование материала';
         this.instance = 'material';
         this.form = this.fb.group({
           img: [this.itemService.selectedMaterial?.img, [Validators.required]],
@@ -80,7 +80,7 @@ export class ManipulateComponent implements OnInit {
       }
       case 'product' : {
         this.availabilityChecker(this.itemService.selectedProduct,this.itemService.selectedProvider, this.itemService.selectedMaterial);
-        this.title = 'Добавление нового товара';
+        this.title = this.route.routeConfig?.path === ROUTER_NAMES.ADD ? 'Добавление нового изделия' : 'Редактирование изделия';
         this.instance = 'product';
         this.form = this.fb.group({
           img: [this.itemService.selectedProduct?.img, [Validators.required]],
