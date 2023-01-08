@@ -4,9 +4,9 @@ import { AppController } from './core/app.controller';
 import { AppService } from './core/app.service';
 import { ProductsModule } from './products/products.module';
 import { EmployeesModule } from './employees/employees.module';
-import { ShopsModule } from './shops/shops.module';
+import { PoolsModule } from './pools/pools.module';
 import { credentials } from "../credentials";
-import { Shop } from "./shops/shop.entity";
+import { Pool } from "./pools/pool.entity";
 import { Employee } from "./employees/employee.entity";
 import { Product } from "./products/product.entity";
 import { ProvidersModule } from './providers/providers.module';
@@ -23,12 +23,12 @@ import { Material } from "./materials/material.entity";
       username: credentials.login,
       password: credentials.password,
       database: credentials.database,
-      entities: [Shop, Employee, Product, Provider, Material],
+      entities: [Pool, Employee, Product, Provider, Material],
       synchronize: true
     }),
     ProductsModule,
     EmployeesModule,
-    ShopsModule,
+    PoolsModule,
     ProvidersModule,
     MaterialsModule
   ],

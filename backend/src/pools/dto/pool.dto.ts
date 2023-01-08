@@ -1,4 +1,4 @@
-export class ShopDto {
+export class PoolDto {
     img: string;
     address: string;
     openTime: string;
