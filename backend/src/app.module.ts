@@ -2,17 +2,17 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from './core/app.controller';
 import { AppService } from './core/app.service';
-import { ProductsModule } from './products/products.module';
+import { PaymentsModule } from './payments/payments.module';
 import { EmployeesModule } from './employees/employees.module';
 import { PoolsModule } from './pools/pools.module';
 import { credentials } from "../credentials";
 import { Pool } from "./pools/pool.entity";
 import { Employee } from "./employees/employee.entity";
-import { Product } from "./products/product.entity";
-import { ProvidersModule } from './providers/providers.module';
-import { Provider } from "./providers/provider.entity";
-import { MaterialsModule } from './materials/materials.module';
-import { Material } from "./materials/material.entity";
+import { Payment } from "./payments/payment.entity";
+import { ClientsModule } from './clients/clients.module';
+import { Client } from "./clients/client.entity";
+import { BillsModule } from './bills/bills.module';
+import { Bill } from "./bills/bill.entity";
 
 @Module({
   imports: [
@@ -23,14 +23,14 @@ import { Material } from "./materials/material.entity";
       username: credentials.login,
       password: credentials.password,
       database: credentials.database,
-      entities: [Pool, Employee, Product, Provider, Material],
+      entities: [Pool, Employee, Payment, Client, Bill],
       synchronize: true
     }),
-    ProductsModule,
+    PaymentsModule,
     EmployeesModule,
     PoolsModule,
-    ProvidersModule,
-    MaterialsModule
+    ClientsModule,
+    BillsModule
   ],
   controllers: [AppController],
   providers: [AppService],
