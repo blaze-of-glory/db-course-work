@@ -18,75 +18,39 @@
         <button [routerLink]="ROUTER_LINKS.ADD + '/employee'" class="btn btn-success ms-2 add">+</button>
       </div>
     </ng-template>
-    <ng-template ngSwitchCase="shops">
-      <div *ngFor="let shop of shopsList" class="col-3 mb-3">
+    <ng-template ngSwitchCase="pools">
+      <div *ngFor="let pool of pools" class="col-3 mb-3">
         <div class="card" style="width: 18rem;">
-          <img [src]="shop?.img" alt="Фото магазина" class="card-img-top">
+          <img [src]="pool?.img" alt="Фото бассейна" class="card-img-top">
           <div class="card-body">
-            <p>Адресс: {{shop.address}}</p>
-            <h5 class="card-title">с {{ shop.openTime.slice(0, 5) }} до {{ shop.closeTime.slice(0, 5) }}</h5>
+            <p>Адресс: {{pool.address}}</p>
+            <h5 class="card-title">с {{ pool.openTime.slice(0, 5) }} до {{ pool.closeTime.slice(0, 5) }}</h5>
             <div class="d-flex justify-content-center mt-3">
-              <button class="btn btn-primary" (click)="edit(shop)">Редактировать</button>
-              <button class="btn btn-danger" (click)="delete(shop.id)">Удалить</button>
+              <button class="btn btn-primary" (click)="edit(pool)">Редактировать</button>
+              <button class="btn btn-danger" (click)="delete(pool.id)">Удалить</button>
             </div>
           </div>
         </div>
       </div>
       <div>
-        <button [routerLink]="ROUTER_LINKS.ADD + '/shop'" class="btn btn-success ms-2 add">+</button>
+        <button [routerLink]="ROUTER_LINKS.ADD + '/pool'" class="btn btn-success ms-2 add">+</button>
       </div>
     </ng-template>
-    <ng-template ngSwitchCase="providers">
-      <div *ngFor="let provider of providersList" class="col-3 mb-3">
+    <ng-template ngSwitchCase="clients">
+      <div *ngFor="let client of clients" class="col-3 mb-3">
         <div class="card" style="width: 18rem;">
-          <img [src]="provider?.img" alt="Логотип поставщика" class="card-img-top">
+          <img [src]="client?.img" alt="Аватар" class="card-img-top">
           <div class="card-body">
-            <h5 [routerLink]="provider.id" (click)="select(provider)" class="card-title">{{provider.title}}</h5>
-            <h6 class="text-center">{{provider.subtitle}}</h6>
-            <p>{{provider.description}}</p>
+            <h5 [routerLink]="client.id" (click)="select(client)" class="card-title">{{client.name}}</h5>
+            <p>{{client.description}}</p>
             <div class="d-flex justify-content-center mt-3">
-              <button class="btn btn-primary" (click)="edit(provider)">Редактировать</button>
+              <button class="btn btn-primary" (click)="edit(client)">Редактировать</button>
             </div>
           </div>
         </div>
       </div>
       <div>
-        <button [routerLink]="ROUTER_LINKS.ADD + '/provider'" class="btn btn-success ms-2 add">+</button>
-      </div>
-    </ng-template>
-    <ng-template ngSwitchCase="materials">
-      <div *ngFor="let material of materialsList" class="col-3 mb-3">
-        <div class="card" style="width: 18rem;">
-          <img [src]="material?.img" alt="Фото материала" class="card-img-top">
-          <div class="card-body">
-            <h5 [routerLink]="material.id" (click)="select(material)" class="card-title">{{material.title}}</h5>
-            <p>{{material.description}}</p>
-            <div class="d-flex justify-content-center mt-3">
-              <button class="btn btn-primary" (click)="edit(material)">Редактировать</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <button [routerLink]="ROUTER_LINKS.ADD + '/material'" class="btn btn-success ms-2 add">+</button>
-      </div>
-    </ng-template>
-    <ng-template ngSwitchCase="products">
-      <div *ngFor="let product of productsList" class="col-3 mb-3">
-        <div class="card" style="width: 18rem;">
-          <img [src]="product?.img" alt="Фото изделия" class="card-img-top">
-          <div class="card-body">
-            <h5 [routerLink]="product.id" class="card-title">{{product.title}}</h5>
-            <p>{{product.description}}</p>
-            <div class="d-flex justify-content-center mt-3">
-              <button class="btn btn-primary" (click)="edit(product)">Редактировать</button>
-              <button class="btn btn-danger" (click)="delete(product.id)">Удалить</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <button [routerLink]="ROUTER_LINKS.ADD + '/product'" class="btn btn-success ms-2 add">+</button>
+        <button [routerLink]="ROUTER_LINKS.ADD + '/client'" class="btn btn-success ms-2 add">+</button>
       </div>
     </ng-template>
   </div>

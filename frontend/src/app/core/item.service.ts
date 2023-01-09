@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Shop } from "../shared/interfaces/shop";
+import { Pool } from "../shared/interfaces/pool";
 import { Employee } from "../shared/interfaces/employee";
-import { Provider } from '../shared/interfaces/provider';
-import { Material } from '../shared/interfaces/material';
-import { Product } from '../shared/interfaces/product';
+import { Client } from '../shared/interfaces/client';
+import { Payment } from '../shared/interfaces/payment';
+import { Bill } from '../shared/interfaces/bill';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
 
- public selectedShop: Shop | null = null;
+ public selectedPool: Pool | null = null;
  public selectedEmployee: Employee | null = null;
- public selectedProvider: Provider | null = null;
- public selectedMaterial: Material | null = null;
- public selectedProduct: Product | null = null;
+ public selectedClient: Client | null = null;
+ public selectedPayment: Payment | null = null;
+ public selectedBill: Bill | null = null;
 
   constructor() { }
 }

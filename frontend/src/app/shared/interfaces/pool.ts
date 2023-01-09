@@ -1,4 +1,4 @@
-export interface Shop {
+export interface Pool {
   id: string;
   img: string;
   address: string;

@@ -1,24 +1,58 @@
-<div *ngIf="itemType === 'product'; else employeeCard">
-  <h1 class="text-center">{{product.title}}</h1>
+<div *ngIf="itemType === 'client'; else employeeCard">
+  <h1 class="text-center">{{client.name}} {{client.surname}}</h1>
   <div class="image-block mb-3">
     <div class="image-wrapper">
-      <img [src]="product.img" alt="Фото товара">
+      <img [src]="client.img" alt="Аватар">
     </div>
   </div>
   <ul class="list-group">
-    <li class="list-group-item">Тип: {{product.type}}</li>
-    <li class="list-group-item">Поставщик: {{product.provider.title}}</li>
-    <li class="list-group-item">Материал: {{product.material.title}}</li>
-    <li class="list-group-item">Вес: {{product.weight}}</li>
-    <li class="list-group-item">Цена: {{product.cost}}</li>
+    <li class="list-group-item">Учётный номер: {{client.id}}</li>
+    <li class="list-group-item">Дополнительная информация: {{client.description}}</li>
+    <li class="list-group-item">Дата регистрации: {{client.registrationDate}}</li>
   </ul>
+  <div class="d-flex flex-column justify-content-center mb-3">
+    <h2 class="text-center">Платежи</h2>
+    <button [routerLink]="ROUTER_LINKS.ADD + '/payment'" class="btn btn-success mb-3">Добавить оплату</button>
+    <div *ngFor="let payment of client.payments" class="col-3 mb-3">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{payment.title}}</h5>
+          <p>УИН: {{payment.id}}</p>
+          <p>Инфо: {{payment.description}}</p>
+          <p>Сумма платежа: {{payment.amount}}</p>
+          <div class="d-flex flex-column mt-3">
+            <button class="btn btn-primary mb-2" [routerLink]="ROUTER_LINKS.EDIT + '/payment'">Редактировать</button>
+            <button class="btn btn-danger" (click)="this.delete('payment', payment.id)">Удалить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-column justify-content-center">
+    <h2 class="text-center">Задолженности</h2>
+    <button [routerLink]="ROUTER_LINKS.ADD + '/bill'" class="btn btn-success mb-3">Выставить счёт</button>
+    <div *ngFor="let bill of client.bills" class="col-3 mb-3">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{bill.title}}</h5>
+          <p>УИН: {{bill.id}}</p>
+          <p>Инфо: {{bill.description}}</p>
+          <p>Сумма платежа: {{bill.amount}}</p>
+          <div class="d-flex flex-column mt-3">
+            <button class="btn btn-primary mb-2" [routerLink]="ROUTER_LINKS.EDIT + '/bill'">Редактировать</button>
+            <button class="btn btn-danger" (click)="delete('bill', bill.id)">Удалить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <ng-template #employeeCard>
   <div *ngIf="employee">
     <h1 class="text-center">{{employee.name}} {{employee.surname}}</h1>
     <div class="image-block mb-3">
       <div class="image-wrapper">
-        <img [src]="employee.img" alt="Фото сотрудника">
+        <img [src]="employee.img" alt="Аватар">
       </div>
     </div>
     <ul class="list-group">

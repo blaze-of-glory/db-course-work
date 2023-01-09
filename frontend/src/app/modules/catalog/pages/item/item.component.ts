@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { Product } from "../../../../shared/interfaces/product";
 import { Employee } from "../../../../shared/interfaces/employee";
 import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 import { ApiService } from "../../../../core/api.service";
-import { ItemService } from '../../../../core/item.service';
+import { Client } from '../../../../shared/interfaces/client';
+import { ROUTER_LINKS } from '../../../../shared/constants/router-links';
 
 @Component({
   selector: 'app-item',
@@ -12,23 +12,23 @@ import { ItemService } from '../../../../core/item.service';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit{
-  product!: Product;
+  client!: Client;
   employee!: Employee;
-  itemType!: 'product' | 'employee';
+  itemType!: 'client' | 'employee';
+
+  public readonly ROUTER_LINKS = ROUTER_LINKS;
 
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private itemService: ItemService,
   ) {  }
 
   ngOnInit(): void {
     switch (this.route.snapshot.routeConfig?.path) {
-      case ROUTER_NAMES.PRODUCT : {
-        this.itemType = 'product';
-        this.apiService.getProductById(this.route.snapshot.params['product']).subscribe(selectedProduct => {
-          this.product = selectedProduct;
-        });
+      case ROUTER_NAMES.CLIENT : {
+        console.log(this.route.snapshot.params['client']);
+        this.itemType = 'client';
+        this.getClient();
         break;
       }
       case ROUTER_NAMES.EMPLOYEE : {
@@ -38,6 +38,19 @@ export class ItemComponent implements OnInit{
         });
         break;
       }
+    }
+  }
+
+  public getClient() {
+    this.apiService.getClientById(this.route.snapshot.params['client']).subscribe(selectedClient => {
+      this.client = selectedClient;
+    });
+  }
+
+  public delete (type: 'payment' | 'bill', id: string) {
+    switch (type) {
+      case 'bill': return this.apiService.deleteBill(id).subscribe( () => this.getClient());
+      case 'payment': return this.apiService.deletePayment(id).subscribe( () => this.getClient());
     }
   }
 }

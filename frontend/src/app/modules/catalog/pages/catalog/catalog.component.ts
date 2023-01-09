@@ -3,10 +3,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { ROUTER_NAMES } from '../../../../shared/constants/router-names';
 import { Employee } from "../../../../shared/interfaces/employee";
 import { ApiService } from "../../../../core/api.service";
-import { Shop } from "../../../../shared/interfaces/shop";
-import { Provider } from "../../../../shared/interfaces/provider";
-import { Material } from "../../../../shared/interfaces/material";
-import { Product } from "../../../../shared/interfaces/product";
+import { Pool } from "../../../../shared/interfaces/pool";
+import { Client } from "../../../../shared/interfaces/client";
 import { ROUTER_LINKS } from '../../../../shared/constants/router-links';
 import { ItemService } from "../../../../core/item.service";
 
@@ -17,12 +15,10 @@ import { ItemService } from "../../../../core/item.service";
 })
 export class CatalogComponent implements OnInit {
   public pageTitle!: string;
-  public providersList!: Provider[];
-  public materialsList!: Material[];
-  public productsList!: Product[];
+  public clients!: Client[];
   public employeesList!: Employee[];
-  public shopsList!: Shop[];
-  public catalogType!: 'providers' | 'materials' | 'products' | 'employees' | 'shops';
+  public pools!: Pool[];
+  public catalogType!: 'clients' | 'employees' | 'pools';
 
   public readonly ROUTER_LINKS = ROUTER_LINKS;
 
@@ -35,21 +31,9 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit(): void {
     switch (this.route.snapshot.routeConfig?.path) {
-      case ROUTER_NAMES.PROVIDERS : {
-        this.catalogType = 'providers';
-        this.pageTitle = 'Список поставщиков';
-        this.getAll();
-        break;
-      }
-      case ROUTER_NAMES.MATERIALS : {
-        this.catalogType = 'materials';
-        this.pageTitle = 'Список материалов';
-        this.getAll();
-        break;
-      }
-      case ROUTER_NAMES.PRODUCTS : {
-        this.catalogType = 'products';
-        this.pageTitle = 'Список изделий';
+      case ROUTER_NAMES.CLIENTS : {
+        this.catalogType = 'clients';
+        this.pageTitle = 'Список клиентов';
         this.getAll();
         break;
       }
@@ -59,9 +43,9 @@ export class CatalogComponent implements OnInit {
         this.getAll();
         break;
       }
-      case ROUTER_NAMES.SHOPS : {
-        this.catalogType = 'shops';
-        this.pageTitle = 'Список магазинов';
+      case ROUTER_NAMES.POOLS : {
+        this.catalogType = 'pools';
+        this.pageTitle = 'Список бассейнов';
         this.getAll();
         break;
       }
@@ -70,21 +54,9 @@ export class CatalogComponent implements OnInit {
 
   private getAll() {
     switch (this.route.snapshot.routeConfig?.path) {
-      case ROUTER_NAMES.PROVIDERS : {
-        this.apiService.getAllProviders().subscribe(providers => {
-          this.providersList = providers;
-        });
-        break;
-      }
-      case ROUTER_NAMES.MATERIALS : {
-        this.apiService.getFilteredMaterials(this.route.snapshot.params['provider']).subscribe(materials => {
-          this.materialsList = materials;
-        });
-        break;
-      }
-      case ROUTER_NAMES.PRODUCTS : {
-        this.apiService.getFilteredProducts(this.route.snapshot.params['provider'],this.route.snapshot.params['material']).subscribe(products => {
-          this.productsList = products;
+      case ROUTER_NAMES.CLIENTS : {
+        this.apiService.getAllClients().subscribe(clients => {
+          this.clients = clients;
         });
         break;
       }
@@ -94,9 +66,9 @@ export class CatalogComponent implements OnInit {
         });
         break;
       }
-      case ROUTER_NAMES.SHOPS : {
-        this.apiService.getAllShops().subscribe(shops => {
-          this.shopsList = shops;
+      case ROUTER_NAMES.POOLS : {
+        this.apiService.getAllPools().subscribe(pools => {
+          this.pools = pools;
         });
         break;
       }
@@ -105,8 +77,8 @@ export class CatalogComponent implements OnInit {
 
   public delete(id: string) {
     switch (this.route.snapshot.routeConfig?.path) {
-      case ROUTER_NAMES.SHOPS: {
-        this.apiService.deleteShop(id).subscribe(() => {
+      case ROUTER_NAMES.POOLS: {
+        this.apiService.deletePool(id).subscribe(() => {
           this.getAll();
         });
         break;
@@ -117,20 +89,14 @@ export class CatalogComponent implements OnInit {
         });
         break;
       }
-      case ROUTER_NAMES.PRODUCTS: {
-        this.apiService.deleteProduct(id).subscribe(() => {
-          this.getAll();
-        });
-        break;
-      }
     }
   }
 
   public edit(item: any) {
     switch (this.route.snapshot.routeConfig?.path) {
-      case ROUTER_NAMES.SHOPS: {
-        this.itemService.selectedShop = item;
-        this.router.navigate([this.ROUTER_LINKS.EDIT + '/shop']);
+      case ROUTER_NAMES.POOLS: {
+        this.itemService.selectedPool = item;
+        this.router.navigate([this.ROUTER_LINKS.EDIT + '/pool']);
         break;
       }
       case ROUTER_NAMES.EMPLOYEES: {
@@ -138,31 +104,18 @@ export class CatalogComponent implements OnInit {
         this.router.navigate([this.ROUTER_LINKS.EDIT + '/employee']);
         break;
       }
-      case ROUTER_NAMES.PROVIDERS: {
-        this.itemService.selectedProvider = item;
-        this.router.navigate([this.ROUTER_LINKS.EDIT + '/provider']);
+      case ROUTER_NAMES.CLIENTS: {
+        this.itemService.selectedClient = item;
+        this.router.navigate([this.ROUTER_LINKS.EDIT + '/client']);
         break
-      }
-      case ROUTER_NAMES.MATERIALS: {
-        this.itemService.selectedMaterial = item;
-        this.router.navigate([this.ROUTER_LINKS.EDIT + '/material']);
-        break;
-      }
-      case ROUTER_NAMES.PRODUCTS: {
-        this.itemService.selectedProduct = item;
-        this.router.navigate([this.ROUTER_LINKS.EDIT + '/product']);
       }
     }
   }
 
   select(item: any) {
     switch (this.route.snapshot.routeConfig?.path) {
-      case ROUTER_NAMES.PROVIDERS : {
-        this.itemService.selectedProvider = item;
-        break;
-      }
-      case ROUTER_NAMES.MATERIALS : {
-        this.itemService.selectedMaterial = item;
+      case ROUTER_NAMES.CLIENTS : {
+        this.itemService.selectedClient = item;
         break;
       }
     }

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
-import { AboutUs } from "../shared/interfaces/about-us";
 import { Employee } from "../shared/interfaces/employee";
-import { Shop } from "../shared/interfaces/shop";
-import { Provider } from "../shared/interfaces/provider";
-import { Material } from "../shared/interfaces/material";
+import { Pool } from "../shared/interfaces/pool";
+import { Client } from "../shared/interfaces/client";
 import { Product } from "../shared/interfaces/product";
+import { Bill } from '../shared/interfaces/bill';
+import { Payment } from '../shared/interfaces/payment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +17,6 @@ export class ApiService {
   private readonly apiEndpoint = environment.apiEndpoint;
 
   constructor(private http: HttpClient) { }
-
-  public getAboutUs(): Observable<AboutUs> {
-    return this.http.get<AboutUs>(this.apiEndpoint + '/about-us');
-  }
 
   public getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.apiEndpoint + '/employees');
@@ -42,64 +38,59 @@ export class ApiService {
     return this.http.delete<string>(this.apiEndpoint + `/employees/${id}`);
   }
 
-  public getAllShops(): Observable<Shop[]> {
-    return this.http.get<Shop[]>(this.apiEndpoint + '/shops');
+  public getAllPools(): Observable<Pool[]> {
+    return this.http.get<Pool[]>(this.apiEndpoint + '/pools');
   }
 
-  public createShop(shopDetails: any): Observable<Shop> {
-    return this.http.post<Shop>(this.apiEndpoint + '/shops', shopDetails);
+  public createPool(poolDetails: any): Observable<Pool> {
+    return this.http.post<Pool>(this.apiEndpoint + '/pools', poolDetails);
   }
 
-  public editShop(id: string, shopDetails: any): Observable<Shop> {
-    return this.http.put<Shop>(this.apiEndpoint + `/shops/${id}`, shopDetails);
+  public editPool(id: string, poolDetails: any): Observable<Pool> {
+    return this.http.put<Pool>(this.apiEndpoint + `/pools/${id}`, poolDetails);
   }
 
-  public deleteShop(id: string): Observable<string> {
-    return this.http.delete<string>(this.apiEndpoint + `/shops/${id}`);
+  public deletePool(id: string): Observable<string> {
+    return this.http.delete<string>(this.apiEndpoint + `/pools/${id}`);
   }
 
-  public getAllProviders(): Observable<Provider[]> {
-    return this.http.get<Provider[]>(this.apiEndpoint + '/providers');
+  public getAllClients(): Observable<Client[]> {
+    return this.http.get<Client[]>(this.apiEndpoint + '/clients');
   }
 
-  public createProvider(providerDetails: any): Observable<Provider> {
-    return this.http.post<Provider>(this.apiEndpoint + '/providers', providerDetails);
+  public getClientById(id: string): Observable<Client> {
+    return this.http.get<Client>(this.apiEndpoint + `/clients/${id}`);
   }
 
-  public editProvider(id: string, providerDetails: any): Observable<Provider> {
-    return this.http.put<Provider>(this.apiEndpoint + `/providers/${id}`, providerDetails);
+  public createClient(productDetails: any): Observable<Client> {
+    return this.http.post<Client>(this.apiEndpoint + '/clients', productDetails);
   }
 
-  public getFilteredMaterials(providerId: string): Observable<Material[]> {
-    return this.http.get<Material[]>(this.apiEndpoint + `/materials/filter?providerId=${providerId}`);
+  public editClient(id: string, productDetails: any): Observable<Product> {
+    return this.http.put<Product>(this.apiEndpoint + `/clients/${id}`, productDetails);
   }
 
-  public createMaterial(materialDetails: any): Observable<Material> {
-    return this.http.post<Material>(this.apiEndpoint + '/materials', materialDetails)
+  public createPayment(id: string, paymentDetails: any): Observable<Payment> {
+    return this.http.post<Payment>(this.apiEndpoint + `/payments/${id}`, paymentDetails);
   }
 
-  public editMaterial(id: string, materialDetails: any): Observable<Material> {
-    return this.http.put<Material>(this.apiEndpoint + `/materials/${id}`, materialDetails);
+  public editPayment(id: string, paymentDetails: any): Observable<Payment> {
+    return this.http.put<Payment>(this.apiEndpoint + `/payments/${id}`, paymentDetails);
   }
 
-  public getFilteredProducts(providerId: string, materialId: string): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiEndpoint + `/products/filter?providerId=${providerId}&materialId=${materialId}`);
+  public deletePayment (id: string): Observable<string> {
+    return this.http.delete<string>(this.apiEndpoint + `/payments/${id}`);
   }
 
-  getProductById(id: string): Observable<Product> {
-    return this.http.get<Product>(this.apiEndpoint + `/products/${id}`);
+  public createBill(id: string, billDetails: any): Observable<Bill> {
+    return this.http.post<Bill>(this.apiEndpoint + `/bills/${id}`, billDetails)
   }
 
-  public createProduct(productDetails: any): Observable<Product> {
-    return this.http.post<Product>(this.apiEndpoint + '/products', productDetails);
+  public editBill(id: string, billDetails: any): Observable<Bill> {
+    return this.http.put<Bill>(this.apiEndpoint + `/bills/${id}`, billDetails);
   }
 
-  public editProduct(id: string, productDetails: any): Observable<Product> {
-    return this.http.put<Product>(this.apiEndpoint + `/products/${id}`, productDetails);
+  public deleteBill(id: string): Observable<string> {
+    return this.http.delete<string>(this.apiEndpoint + `/bills/${id}`);
   }
-
-  public deleteProduct(id: string): Observable<string> {
-    return this.http.delete<string>(this.apiEndpoint + `/products/${id}`);
-  }
-
 }

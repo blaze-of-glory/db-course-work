@@ -6,9 +6,6 @@ export class Bill {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
-    img: string;
-
     @Column({type: 'varchar', length: '64'})
     title: string;
 

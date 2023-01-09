@@ -34,24 +34,24 @@
         <button (click)="goBackToAll(form)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
-    <ng-template ngSwitchCase="shop">
+    <ng-template ngSwitchCase="pool">
       <form [formGroup]="form">
         <div class="mb-3">
-          <label for="shopPhoto" class="form-label">Фото</label>
-          <input formControlName="img" class="form-control" id="shopPhoto" aria-describedby="shopPhotoHelp">
-          <div id="shopPhotoHelp" class="form-text">Укажите ссылку на фото магазина</div>
+          <label for="poolPhoto" class="form-label">Фото</label>
+          <input formControlName="img" class="form-control" id="poolPhoto" aria-describedby="poolPhotoHelp">
+          <div id="poolPhotoHelp" class="form-text">Укажите ссылку на фото бассейна</div>
         </div>
         <div class="mb-3">
-          <label for="shopAddress" class="form-label">Адресс</label>
-          <input formControlName="address" class="form-control" id="shopAddress">
+          <label for="poolAddress" class="form-label">Адресс</label>
+          <input formControlName="address" class="form-control" id="poolAddress">
         </div>
         <div class="mb-3">
-          <label for="shopOpenTime" class="form-label">Время открытия</label>
-          <input formControlName="openTime" class="form-control" id="shopOpenTime" type="time">
+          <label for="poolOpenTime" class="form-label">Время открытия</label>
+          <input formControlName="openTime" class="form-control" id="poolOpenTime" type="time">
         </div>
         <div class="mb-3">
-          <label for="shopCloseTime" class="form-label">Время закрытия</label>
-          <input formControlName="closeTime" class="form-control" id="shopCloseTime" type="time">
+          <label for="poolCloseTime" class="form-label">Время закрытия</label>
+          <input formControlName="closeTime" class="form-control" id="poolCloseTime" type="time">
         </div>
       </form>
       <div class="d-flex justify-content-between">
@@ -59,28 +59,28 @@
         <button (click)="goBackToAll(form)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
-    <ng-template ngSwitchCase="provider">
+    <ng-template ngSwitchCase="client">
       <form [formGroup]="form">
         <div class="mb-3">
-          <label for="providerPhoto" class="form-label">Лого</label>
-          <input formControlName="img" class="form-control" id="providerPhoto" aria-describedby="providerPhotoHelp">
-          <div id="providerPhotoHelp" class="form-text">Укажите ссылку на лого провайдера</div>
+          <label for="clientPhoto" class="form-label">Аватар</label>
+          <input formControlName="img" class="form-control" id="clientPhoto" aria-describedby="clientPhotoHelp">
+          <div id="clientPhotoHelp" class="form-text">Укажите ссылку на фото клиента</div>
         </div>
         <div class="mb-3">
-          <label for="providerTitle" class="form-label">Название</label>
-          <input formControlName="title" class="form-control" id="providerTitle">
+          <label for="clientName" class="form-label">Имя</label>
+          <input formControlName="name" class="form-control" id="clientName">
         </div>
         <div class="mb-3">
-          <label for="providerSubtitle" class="form-label">Слоган</label>
-          <input formControlName="subtitle" class="form-control" id="providerSubtitle">
+          <label for="clientSurname" class="form-label">Фамилия</label>
+          <input formControlName="surname" class="form-control" id="clientSurname">
         </div>
         <div class="mb-3">
-          <label for="providerDescription" class="form-label">Описание</label>
-          <input formControlName="description" class="form-control" id="providerDescription">
+          <label for="clientDescription" class="form-label">Дополнительная информация</label>
+          <input formControlName="description" class="form-control" id="clientDescription">
         </div>
         <div class="mb-3">
-          <label for="providerFoundingDate" class="form-label">Дата основания</label>
-          <input formControlName="foundingDate" class="form-control" id="providerFoundingDate" type="date">
+          <label for="clientRegistrationDate" class="form-label">Дата регистрации</label>
+          <input formControlName="registrationDate" class="form-control" id="clientRegistrationDate" type="date">
         </div>
       </form>
       <div class="d-flex justify-content-between">
@@ -88,20 +88,19 @@
         <button (click)="goBackToAll(form)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
-    <ng-template ngSwitchCase="material">
+    <ng-template ngSwitchCase="payment">
       <form [formGroup]="form">
         <div class="mb-3">
-          <label for="materialPhoto" class="form-label">Фото</label>
-          <input formControlName="img" class="form-control" id="materialPhoto" aria-describedby="materialPhotoHelp">
-          <div id="materialPhotoHelp" class="form-text">Укажите ссылку на фото материала</div>
+          <label for="paymentTitle" class="form-label">Наименование</label>
+          <input formControlName="title" class="form-control" id="paymentTitle">
         </div>
         <div class="mb-3">
-          <label for="materialTitle" class="form-label">Название</label>
-          <input formControlName="title" class="form-control" id="materialTitle">
+          <label for="paymentDescription" class="form-label">Дополнительная информация</label>
+          <input formControlName="description" class="form-control" id="paymentDescription">
         </div>
         <div class="mb-3">
-          <label for="materialDescription" class="form-label">Описание</label>
-          <input formControlName="description" class="form-control" id="materialDescription">
+          <label for="paymentAmount" class="form-label">Сумма</label>
+          <input formControlName="amount" class="form-control" id="paymentAmount">
         </div>
       </form>
       <div class="d-flex justify-content-between">
@@ -109,32 +108,19 @@
         <button (click)="goBackToAll(form)" class="btn btn-danger">Назад</button>
       </div>
     </ng-template>
-    <ng-template ngSwitchCase="product">
+    <ng-template ngSwitchCase="bill">
       <form [formGroup]="form">
         <div class="mb-3">
-          <label for="productPhoto" class="form-label">Фото</label>
-          <input formControlName="img" class="form-control" id="productPhoto" aria-describedby="productPhotoHelp">
-          <div id="productPhotoHelp" class="form-text">Укажите ссылку на фото товара</div>
+          <label for="billTitle" class="form-label">Наименование</label>
+          <input formControlName="title" class="form-control" id="billTitle">
         </div>
         <div class="mb-3">
-          <label for="productTitle" class="form-label">Название</label>
-          <input formControlName="title" class="form-control" id="productTitle">
+          <label for="billDescription" class="form-label">Дополнительная информация</label>
+          <input formControlName="description" class="form-control" id="billDescription">
         </div>
         <div class="mb-3">
-          <label for="productDescription" class="form-label">Описание</label>
-          <input formControlName="description" class="form-control" id="productDescription">
-        </div>
-        <div class="mb-3">
-          <label for="productType" class="form-label">Тип</label>
-          <input formControlName="type" class="form-control" id="productType">
-        </div>
-        <div class="mb-3">
-          <label for="productWeight" class="form-label">Вес</label>
-          <input formControlName="weight" class="form-control" id="productWeight">
-        </div>
-        <div class="mb-3">
-          <label for="productCost" class="form-label">Цена</label>
-          <input formControlName="cost" class="form-control" id="productCost">
+          <label for="billAmount" class="form-label">Сумма</label>
+          <input formControlName="amount" class="form-control" id="billAmount">
         </div>
       </form>
       <div class="d-flex justify-content-between">
